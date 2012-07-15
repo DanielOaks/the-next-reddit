@@ -1,0 +1,15 @@
+{
+  "name": "The Next Reddit",
+  "version": "2012.6.15.2",
+  "description": "Redesign to Reddit, to simplify things and make everything look a bit better.",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.reddit.com/*"
+      ],
+      "all_frames": true,
+      "css": ["thenextreddit_chrome.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
