@@ -133,10 +133,15 @@
         z-index: 1;
         font-size: 80%;
     }
-    .tabmenu li.selected {
+    .tabmenu.formtab {
+        z-index: 999999;
+    }
+    .tabmenu li {
         display: inline-block !important;
-        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAIAAAB1kpiRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAF1JREFUGFdVjEEKgEAIRf0eoiGoTXT/CwUtImimfZsW2Z8EmT6CT5+I6zb5YmZHOQl96gD4Ur2FYwgcnasONw2JRYgLbZ1CWO0Fli2Hizwm614I9fk8/hzDkUsReQGhEDT4WMUorwAAAABJRU5ErkJggg==') no-repeat bottom center !important;
         height: 28px !important;
+    }
+    .tabmenu li.selected {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAIAAAB1kpiRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAF1JREFUGFdVjEEKgEAIRf0eoiGoTXT/CwUtImimfZsW2Z8EmT6CT5+I6zb5YmZHOQl96gD4Ur2FYwgcnasONw2JRYgLbZ1CWO0Fli2Hizwm614I9fk8/hzDkUsReQGhEDT4WMUorwAAAABJRU5ErkJggg==') no-repeat bottom center !important;
     }
     .tabmenu li a {
         border: none !important;
@@ -147,6 +152,13 @@
         color: #336699 !important;
     }
     .tabmenu li:selected a {
+        color: orangered !important;
+    }
+    .tabmenu.formtab li {
+        font-weight: bold !important;
+        font-size: 80%;
+    }
+    .tabmenu.formtab li:selected a {
         color: orangered !important;
     }
     #header-bottom-right .separator {
