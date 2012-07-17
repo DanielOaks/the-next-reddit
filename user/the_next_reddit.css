@@ -12,10 +12,10 @@
     }
 
     /* Floating My Reddits list */
-    body {
+    .tnr body {
         overflow-x: hidden;
     }
-    #sr-header-area {
+    .tnr #sr-header-area {
         position: absolute;
         left: 160px;
         top: 24px;
@@ -25,33 +25,33 @@
         overflow: visible !important;
         max-width: 86%;
     }
-    #sr-header-area .width-clip {
+    .tnr #sr-header-area .width-clip {
         position: relative !important;
     }
-    #sr-header-area .sr-list {
+    .tnr #sr-header-area .sr-list {
         position: relative;
         float: left;
         padding-left: 5px !important;
         padding-bottom: 3px !important;
         max-width: 86%;
     }
-    #header-bottom-left .redditname, #header-bottom-left .pagename {
+    .tnr-collapsed #header-bottom-left .redditname, .tnr-collapsed #header-bottom-left .pagename {
         display: none !important; /* overlaps with my reddits list */
     }
-    .sr-bar a {
+    .tnr .sr-bar a {
         color: #306496 !important;
     }
-    #sr-header-area .selected a {
+    .tnr #sr-header-area .selected a {
         color: #ff410c !important;
     }
-    .sr-bar .separator {
+    .tnr .sr-bar .separator {
         visibility: hidden;
         margin: 0 5px !important;
     }
-    .sr-list .separator:nth-child(2) {
+    .tnr .sr-list .separator:nth-child(2) {
         margin: 0 12px !important;
     }
-    .dropdown.srdrop .selected {
+    .tnr .dropdown.srdrop .selected {
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAIAAAD38zoCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVBhXY3j+8deqDVuBJBxBuAwnLtxwcXFJSkm7++w9EOXkFwK5+46dYQRylsybefjAHi4ubi5u7jevXxmZWaTnFDOCdDEwrFu5dP2qpUBGYFh0UHg0kAGVAIKzp44DSWMzSxCHgQEA24o9mO4WSK4AAAAASUVORK5CYII=') !important;
         background-position: right 8px !important;
         padding-right: 14px !important;
@@ -60,30 +60,32 @@
     }
     
     /* my-reddit list background */
-    #sr-header-area .dropdown {
+    .tnr-collapsed #sr-header-area .dropdown {
         background-color: #e7f1fa !important;
         border-radius: 3px 3px 0 0;
     }
-    .sr-list {
+    .tnr-collapsed .sr-list {
         background-color: #e7f1fa !important;
         border-radius: 0 3px 3px 3px;
     }
     
     /* Header */
-    #header {
-        background-color: #e7f1fa !important;
+    .tnr #header {
         border-bottom: none !important;
     }
-    #header-bottom-left {
+    .tnr-collapsed #header {
+        background-color: #e7f1fa !important;
+    }
+    .tnr #header-bottom-left {
         padding-top: 15px !important;
         padding-bottom: 15px !important;
     }
-    #header-img {
+    .tnr #header-img {
         margin-left: 13px;
     }
     
     /* Userbar List, etc */
-    #header-bottom-right {
+    .tnr #header-bottom-right {
         float: left !important;
         border-top-left-radius: 0 !important;
     
@@ -94,6 +96,8 @@
         text-align: right;
         
         font-size: 115%;
+    }
+    .tnr-collapsed #header-bottom-right {
         color: #336699 !important;
         
         border: 1px solid #fff;
@@ -110,21 +114,21 @@
         background: linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f0f7', endColorstr='#f5faff',GradientType=0 ) !important; /* IE6-9 */
     }
-    #header-bottom-right a {
+    .tnr #header-bottom-right a {
         color: #336699 !important;
     }
-    #mail {
+    .tnr #mail {
         text-align: left; /* text inside mail logo */
         top: 1px !important;
     }
-    .pref-lang {
+    .tnr .pref-lang {
         font-weight: normal !important;
     }
-    #header-bottom-right .logout {
+    .tnr #header-bottom-right .logout {
         display: inline-block;
         margin-right: 22px !important;
     }
-    .tabmenu {
+    .tnr .tabmenu {
         position: absolute;
         left: 38px !important;
         top: 75px;
@@ -133,64 +137,64 @@
         z-index: 1;
         font-size: 80%;
     }
-    .tabmenu.formtab {
+    .tnr .tabmenu.formtab {
         z-index: 999999;
     }
-    .tabmenu li {
+    .tnr .tabmenu li {
         display: inline-block !important;
         height: 28px !important;
     }
-    .tabmenu li.selected {
+    .tnr .tabmenu li.selected {
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAIAAAB1kpiRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAF1JREFUGFdVjEEKgEAIRf0eoiGoTXT/CwUtImimfZsW2Z8EmT6CT5+I6zb5YmZHOQl96gD4Ur2FYwgcnasONw2JRYgLbZ1CWO0Fli2Hizwm614I9fk8/hzDkUsReQGhEDT4WMUorwAAAABJRU5ErkJggg==') no-repeat bottom center !important;
     }
-    .tabmenu li a {
+    .tnr .tabmenu li a {
         border: none !important;
         background: none !important;
         font-size: 125%;
         font-weight: bold !important;
     }
-    .tabmenu li:not(.selected) a {
+    .tnr .tabmenu li:not(.selected) a {
         color: #336699 !important;
     }
-    .tabmenu li:selected a {
+    .tnr .tabmenu li:selected a {
         color: orangered !important;
     }
-    .tabmenu.formtab li {
+    .tnr .tabmenu.formtab li {
         font-weight: bold !important;
         font-size: 80%;
     }
-    .tabmenu.formtab .selected a {
+    .tnr .tabmenu.formtab .selected a {
         color: orangered !important;
         font-size: 125% !important;
     }
-    #header-bottom-right .separator {
+    .tnr #header-bottom-right .separator {
         visibility: hidden;
     }
-    #header-bottom-right .separator:nth-last-child(-n+2) {
+    .tnr #header-bottom-right .separator:nth-last-child(-n+2) {
         visibility: visible;
         margin: 0 12px !important;
     }
-    .user .userkarma {
+    .tnr .user .userkarma {
         margin: 0 3px;
         border-bottom: 1px dotted #999 !important;
     }
     
     /* Side */
-    .side {
+    .tnr .side {
         margin-top: 5px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
-    .side .spacer {
+    .tnr .side .spacer {
         margin: 17px 0 22px !important;
     }
-    #search input[type="text"] {
+    .tnr #search input[type="text"] {
         width: 266px !important;
         padding: 5px 16px 6px !important;
         border-radius: 5px;
         border-color: #c6c6c6 !important;
     }
-    .morelink {
+    .tnr .morelink {
         border: 1px solid #c6deea;
         padding: 4px 0 5px !important;
         width: 87%;
@@ -206,43 +210,43 @@
         background: linear-gradient(top, #f5faff 0%,#c6deea 100%) !important; /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5faff', endColorstr='#c6deea',GradientType=0 ) !important; /* IE6-9 */
     }
-    .morelink .nub {
+    .tnr .morelink .nub {
         display: none;
     }
     
-    .morelink a {
+    .tnr .morelink a {
         margin-left: 20px;
         font-weight: normal;
     }
-    .morelink:hover a {
+    .tnr .morelink:hover a {
         color: #114477 !important;
     }
-    .sidebox .subtitle {
+    .tnr .sidebox .subtitle {
         margin-right: 35px !important;
     }
-    .sidebox .spacer a {
+    .tnr .sidebox .spacer a {
         top: -45px !important;
         left: 32px !important;
     }
-    .spacer .sidebox .spacer {
+    .tnr .spacer .sidebox .spacer {
         padding-left: 25px !important;
         margin-top: 0 !important;
         margin-bottom: 10px !important;
     }
-    .side .sidecontentbox .title h1 {
+    .tnr .side .sidecontentbox .title h1 {
         font-size: 110% !important;
         font-weight: bold !important;
         margin-bottom: 3px !important;
         display: inline-block !important;
     }
-    .side .sidecontentbox .content {
+    .tnr .side .sidecontentbox .content {
         padding: 17px !important;
         border-color: #c6c6c6 !important;
     }
-    .side .sidecontentbox .content .gadget .reddit-link {
+    .tnr .side .sidecontentbox .content .gadget .reddit-link {
         padding-bottom: 7px !important;
     }
-    .side .sidecontentbox .content .gadget .reddit-entry {
+    .tnr .side .sidecontentbox .content .gadget .reddit-entry {
         margin-left: 30px !important;
     }
     
@@ -268,20 +272,20 @@
         font-size: 110% !important;
     }
     
-    .content, .side {
+    .tnr .content, .side {
         clear: left !important;
     }
-    .content {
+    .tnr .content {
         padding-top: 1px !important;
     }
     
     /* next-prev */
-    .nextprev {
+    .tnr .nextprev {
         margin-top: 30px !important;
         margin-left: 29px !important;
         font-size: 150% !important;
     }
-    .nextprev a {
+    .tnr .nextprev a {
         margin-left: 20px !important;
         
         border: 1px solid #c6deea !important;
@@ -298,7 +302,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5faff', endColorstr='#c6deea',GradientType=0 ) !important; /* IE6-9 */
     }
     
-    .mordelink {
+    .tnr .mordelink { /* todo, remove? seems like test code */
         border: 1px solid #c6deea;
         padding: 4px 0 5px !important;
         width: 87%;
@@ -316,11 +320,11 @@
     }
     
     /* footer */
-    .footer-parent {
+    .tnr .footer-parent {
     padding-top: 13px !important;
         text-align: left !important;
     }
-    .bottommenu {
+    .tnr .bottommenu {
         margin-left: 36px !important;
     }
     
@@ -350,48 +354,67 @@
     }
     
     /* Reddit Enhancement Suite fixes */
-    #header-bottom-right.res-navTop {
+    .tnr #header-bottom-right.res-navTop {
         top: 0 !important;
     }
-    .res .tabmenu {
+    .tnr.res .tabmenu {
         padding-top: 11px !important;
     }
-    .res .tabmenu li.selected {
+    .tnr.res .tabmenu li.selected {
         height: 31px !important;
     }
-    .res #sr-header-area {
+    .tnr.res #sr-header-area {
         width: 450px;
     }
-    .res #sr-header-area .sr-bar {
+    .tnr.res #sr-header-area .sr-bar {
         display: block !important;
         width: 100% !important;
         float: left !important;
     }
-    .res #RESShortcutsEditContainer {
+    .tnr.res #RESShortcutsEditContainer {
         float: right;
         margin-top: 2px !important;
         background: none !important;
     }
-    .res #RESShortcutsEditContainer div {
+    .tnr.res #RESShortcutsEditContainer div {
         background: none !important;
     }
-    .res .srSep {
+    .tnr.res .srSep {
         display: none;
     }
-    .res #RESShortcutsViewport {
+    .tnr.res #RESShortcutsViewport {
         margin-left: 2px !important;
     }
     
-    .res #sr-header-area {
+    .tnr.res #sr-header-area {
         background-color: #e7f1fa !important;
         border-radius: 3px 3px 3px 0;
     }
-    .res #RESShortcutsViewport {
+    .tnr.res #RESShortcutsViewport {
         background-color: #e7f1fa !important;
         border-radius: 0 3px 3px 3px;
     }
-    .res #sr-header-area #RESShortcutsViewport #RESShortcuts {
+    .tnr.res #sr-header-area #RESShortcutsViewport #RESShortcuts {
         width: 200px !important;
+    }
+    
+    /* RES Nightmode */
+    .tnr-collapsed.res-nightmode #header-bottom-right {
+        color: #99ccff !important;
+        
+        border: 1px solid #666;
+        border-width: 1px 0;
+        border-color: #666 transparent #666;
+        box-shadow: 0 1px 0px #555, 0 -1px 0px #225588;
+        
+        background: #222 !important; /* Old browsers */
+        background: -moz-linear-gradient(top, #444 0%, #222 40%) !important; /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e9f0f7), color-stop(40%,#f5faff)) !important; /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* IE10+ */
+        background: linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f0f7', endColorstr='#f5faff',GradientType=0 ) !important; /* IE6-9 */
     }
     
     /* list view */
