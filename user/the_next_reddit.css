@@ -161,6 +161,7 @@
     }
     .tabmenu.formtab .selected a {
         color: orangered !important;
+        font-size: 125% !important;
     }
     #header-bottom-right .separator {
         visibility: hidden;
