@@ -3,7 +3,7 @@
 // @namespace    danneh_tnr
 // @description  Helps The Next Reddit style
 // @include      *.reddit.com/*
-// @version      7
+// @version      8
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 
