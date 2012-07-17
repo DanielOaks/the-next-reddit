@@ -73,7 +73,7 @@ $('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
 
 // fix misaligned arrow bar, when header is different height
 var ht = $('#header-bottom-right').offset()['top'];
-$('#header-bottom-left .tabmenu').offset({ top: ht }).css('top', ht + ' !important');
+$('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
 
 // fix content margin-padding
 /*var ht = num($('.content').css("margin-top"))

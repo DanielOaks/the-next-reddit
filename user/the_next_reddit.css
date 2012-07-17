@@ -147,6 +147,7 @@
         border: none !important;
         background: none !important;
         font-size: 125%;
+        font-weight: bold !important;
     }
     .tabmenu li:not(.selected) a {
         color: #336699 !important;
@@ -158,7 +159,7 @@
         font-weight: bold !important;
         font-size: 80%;
     }
-    .tabmenu.formtab li:selected a {
+    .tabmenu.formtab .selected a {
         color: orangered !important;
     }
     #header-bottom-right .separator {
