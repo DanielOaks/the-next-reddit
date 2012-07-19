@@ -12,7 +12,7 @@
     }
 
     /* Floating My Reddits list */
-    .tnr body {
+    body.tnr {
         overflow-x: hidden;
     }
     .tnr #sr-header-area {

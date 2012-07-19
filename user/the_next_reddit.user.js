@@ -52,7 +52,9 @@ parseGlobalStyle();
 updateGlobalStyle();
 
 // the new reddit body class, for tnr-specific css hacks
+//if (GM_getValue("l", false)) {
 $('body').addClass('tnr');
+$('body').addClass('tnr-collapsed');
 
 // auto my reddits horisontal offset
 var rt = $('#header-img').offset().left + $('#header-img').outerWidth() + 20;
@@ -75,6 +77,14 @@ $('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
 var ht = $('#header-bottom-right').offset()['top'];
 $('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
 
+
+
+addGlobalStyle_direct(".tnr-collapsed .sr-list {");
+addGlobalStyle_direct("    left: -" + $('.srdrop').outerWidth() + "px !important;");
+addGlobalStyle_direct("    top: " + $('.srdrop').outerHeight() + "px !important;");
+addGlobalStyle_direct("}");
+updateGlobalStyle();
+
 // fix content margin-padding
 /*var ht = num($('.content').css("margin-top"))
 var total_ht = ht + num($('.content').css("padding-top"));
@@ -84,8 +94,6 @@ if (ht != 0) {
 }*/
 
 // List view
-$('body').addClass('tnr-collapsed');
-
 $('<div id="tnr_listview"><span>list view</span></div>').prependTo('#header');
 $('<div id="tnr_collapsedview"><span>collapsed view</span></div>').prependTo('#sr-header-area');
 
