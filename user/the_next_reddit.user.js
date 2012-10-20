@@ -150,7 +150,7 @@ function listStyleActivate() {
 	if (style_css.indexOf(".tnr-list #tnr-list-generated") == -1) {
 		addGlobalStyle(".tnr-list #tnr-list-generated", "/* this just makes sure we don't include css twice */");
 
-		addGlobalStyle('.tnr-list #header-bottom-left-background', 'wisdth: ' + 163 + 'px;');
+		addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: ' + 163 + 'px;');
 		//addGlobalStyle('.tnr-list #sr-header-area li a', 'max-width: ' + ($('#header-bottom-left').outerWidth() - 30) + 'px !important;');
 
 		addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: 163px;');
