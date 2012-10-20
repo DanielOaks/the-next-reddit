@@ -32,8 +32,8 @@
         position: relative;
         float: left;
         padding-left: 5px !important;
-        padding-bottom: 3px !important;
-        max-width: 86%;
+        padding-bottom: 1px !important;
+        clear: left; /* floar underneath dropdown */
     }
     .tnr-collapsed #header-bottom-left .redditname, .tnr-collapsed #header-bottom-left .pagename {
         display: none !important; /* overlaps with my reddits list */
@@ -57,6 +57,7 @@
         padding-right: 14px !important;
         color: black !important;
         font-weight: normal !important;
+        margin-right: 5px !important;
     }
     
     /* my-reddit list background */
@@ -462,6 +463,7 @@
         display: block !important;
         width: 100% !important;
         overflow: hidden !important;
+        padding-top: 4px;
     }
     .tnr-list #sr-header-area li:hover {
         background-color: #c4ddef;
@@ -523,6 +525,9 @@
     }
     .tnr-list #tnr_collapsedview:hover span {
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAICAYAAADaxo44AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAACESURBVBhXYzx748F/JWlRBhA4de0BmAYBJmEBXgZODg4GAR4uBnV5CagwUOLmwxcML95+YPj3/z+DvLgQg5mWAkQCRIAlP/0CC4AASCdYAgQ4WZmhLAgAS4BUCHKxgAVAAGQC44MXb/+DzAaBhy/fgQVBgOnth88MH758A2OYIAMDAwMA98ot3bILfqQAAAAASUVORK5CYII=');
+    }
+    .tnr-list .sr-list li {
+        cursor: pointer;
     }
     
 }
