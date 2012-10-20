@@ -507,3 +507,57 @@ var BabelExt = (function() {
     detectedBrowser: instance.detectedBrowser
   };
 })();
+
+
+
+
+var isGM = !(typeof GM_getValue === "undefined" || GM_getValue("a", "b") === undefined);
+
+/**
+ * If we're running on a content page, this variable will point at an object
+ * containing settings retrieved from the extension's localStorage, otherwise
+ * we're running in the extension's context and want to access localStorage
+ * directly.
+ *
+ * This allows us to include this script for use as a library in extension
+ * contexts, such as in a prefs page.
+ */
+var cachedSettings = null;
+
+if (!isGM)
+{
+    GM_getValue = function(name, defaultValue)
+    {
+        var value = (cachedSettings === null ?
+                     localStorage.getItem(name) :
+                     cachedSettings[name]);
+        if (value === undefined)
+        {
+            return defaultValue;
+        }
+        //var type = value[0], value.substring(1);
+        switch (type)
+        {
+            case "b":
+                return (value === "true");
+            case "n":
+                return Number(value);
+            default:
+                return value;
+        }
+    }
+
+    GM_setValue = function(name, value)
+    {
+        value = (typeof value)[0] + value;
+        if (cachedSettings === null)
+        {
+            localStorage.setItem(name, value);
+        }
+        else
+        {
+            cachedSettings[name] = value;
+            chrome.extension.sendRequest({type: "setpref", name: name, value: value});
+        }
+    }
+}

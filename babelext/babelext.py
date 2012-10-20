@@ -71,15 +71,57 @@ if vars(args)['link']:
 
 
     ##
+    ## Userscript/Userstyle base
+    ##
+    if vars(args)['d']: print('') # space between different build dirs
+    if vars(args)['d']: print('    Building Userscript/Userstyle etc files into ' + build_dir + os.sep + 'User')
+    if vars(args)['d']: print('      Note: fonts and icons not built into User directory')
+
+    for filename in os.listdir('lib'):
+        if filename.split('.')[-1] not in ['js', 'css']:
+            continue
+        if filename not in ['manifest.json', 'BabelExt.js']:
+            if vars(args)['d']: print('        Copying file ' + filename)
+            shutil.copyfile('lib' + os.sep + filename, build_dir + os.sep + 'User' + os.sep + filename)
+
+    if vars(args)['d']: print('') # space between different build dirs
+
+
+    ##
     ## Chrome manifest
     ##
     if vars(args)['d']: print('    Building Chrome manifest and files into ' + build_dir + os.sep + 'Chrome')
     chrome_manifest = {}
+    chrome_manifest["manifest_version"] = 2
+    chrome_manifest['content_scripts'] = [{}]
+    #chrome_manifest['content_scripts'][0]['all_frames'] = True
+
+
+    if 'fonts' in manifest['base']['files']:
+        if vars(args)['d']: print('        Building font file')
+        chrome_filepath = 'chrome-extension://__MSG_@@extension_id__/'
+        fontfile = ''
+
+        for font in manifest['base']['files']['fonts']:
+            for fontformat in manifest['base']['files']['fonts'][font]:
+                if fontformat in ['truetype']:
+                    for fontface in manifest['base']['files']['fonts'][font][fontformat]:
+                        fontfile += '@font-face {\n'
+                        fontfile += "    font-family: '" + font + "';\n"
+                        fontfile += "    src: url('" + chrome_filepath + fontface[1] + "') format('" + fontformat + "');\n"
+                        fontfile += "    font-weight: " + fontface[0][0] + ";\n"
+                        fontfile += "    font-style: " + fontface[0][1] + ";\n"
+                        fontfile += "}\n\n"
+
+        file_path = build_dir + os.sep + 'Chrome' + os.sep + 'fonts.css'
+        chrome_font_file = codecs.open(file_path, 'w', 'utf8')
+        chrome_font_file.write(fontfile)
+        chrome_font_file.close()
+
 
     chrome_manifest['name'] = manifest['base']['name']
     chrome_manifest['version'] = manifest['base']['version']
     chrome_manifest['description'] = manifest['base']['description']
-    chrome_manifest['content_scripts'] = [{}]
     chrome_manifest['content_scripts'][0]['matches'] = []
     for match in manifest['base']['sites']:
         chrome_manifest['content_scripts'][0]['matches'].append('http://' + match + '/*')
@@ -92,20 +134,24 @@ if vars(args)['link']:
                 chrome_manifest['icons'][size] = manifest['base']['icons'][size]
 
     # automagically add files
-    chrome_manifest['content_scripts'][0]['files'] = {}
-
     for filetype in manifest['base']['files']:
-        chrome_manifest['content_scripts'][0]['files'][filetype] = []
+        if filetype == 'fonts':
+            continue
+        chrome_manifest['content_scripts'][0][filetype] = []
         for name in manifest['base']['files'][filetype]:
-            chrome_manifest['content_scripts'][0]['files'][filetype].append(name)
+            chrome_manifest['content_scripts'][0][filetype].append(name)
 
     chrome_manifest.update(manifest['chrome'])
 
     # aaand copy the actual lib files into there
     for filename in os.listdir('lib'):
-        if filename != 'manifest.json':
+        if filename not in ['manifest.json', '.DS_Store']:
             if vars(args)['d']: print('        Copying file ' + filename)
             shutil.copyfile('lib' + os.sep + filename, build_dir + os.sep + 'Chrome' + os.sep + filename)
+
+    # font files, do this here to get past the manual chrome manifest
+    if 'fonts' in manifest['base']['files']:
+        chrome_manifest['content_scripts'][0]['css'].append('fonts.css')
 
     # save manifest
     if vars(args)['d']: print('        Saving manifest')
@@ -113,6 +159,9 @@ if vars(args)['link']:
     chrome_file = codecs.open(file_path, 'w', 'utf8')
     chrome_file.write(json.dumps(chrome_manifest, sort_keys=True, indent=4))
     chrome_file.close()
+
+
+    if vars(args)['d']: print('') # space between different build dirs
 
 
     ##
@@ -145,3 +194,6 @@ if vars(args)['link']:
     firefox_file = codecs.open(file_path, 'w', 'utf8')
     firefox_file.write(json.dumps(firefox_manifest, sort_keys=True, indent=4))
     firefox_file.close()
+
+
+    if vars(args)['d']: print('') # space between different build dirs

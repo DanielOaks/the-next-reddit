@@ -114,12 +114,19 @@
         background: linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f0f7', endColorstr='#f5faff',GradientType=0 ) !important; /* IE6-9 */
     }
+    .tnr-list #header-bottom-right {
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+    }
     .tnr #header-bottom-right a {
         color: #336699 !important;
     }
     .tnr #mail {
         text-align: left; /* text inside mail logo */
         top: 1px !important;
+    }
+    .tnr #modmail {
+        text-align: left; /* text inside modmail logo */
     }
     .tnr .pref-lang {
         font-weight: normal !important;
@@ -396,25 +403,6 @@
     }
     .tnr.res #sr-header-area #RESShortcutsViewport #RESShortcuts {
         width: 200px !important;
-    }
-    
-    /* RES Nightmode */
-    .tnr-collapsed.res-nightmode #header-bottom-right {
-        color: #99ccff !important;
-        
-        border: 1px solid #666;
-        border-width: 1px 0;
-        border-color: #666 transparent #666;
-        box-shadow: 0 1px 0px #555, 0 -1px 0px #225588;
-        
-        background: #222 !important; /* Old browsers */
-        background: -moz-linear-gradient(top, #444 0%, #222 40%) !important; /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e9f0f7), color-stop(40%,#f5faff)) !important; /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* IE10+ */
-        background: linear-gradient(top, #e9f0f7 0%,#f5faff 40%) !important; /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f0f7', endColorstr='#f5faff',GradientType=0 ) !important; /* IE6-9 */
     }
     
     /* list view */

@@ -14,6 +14,7 @@
         "files": {
             "js": [
                 "BabelExt.js", 
+                "jquery.min.js", 
                 "the_next_reddit.js"
             ], 
             "css": [
@@ -32,7 +33,9 @@
         }
     },
     "chrome": {
-        "background_page": "background.html",
+        "background": {
+            "page": "background.html"
+        },
         "permissions": [
             "tabs",
             "history",
