@@ -35,44 +35,61 @@ function updateGlobalStyle() {
    style.innerHTML = "/* The Next Reddit css */" + style_css;
 }
 
-parseGlobalStyle();
 updateGlobalStyle();
+parseGlobalStyle();
 
-// the new reddit body class, for tnr-specific css hacks
+
+// tnr body classes, for tnr-specific css hacks
 $('body').addClass('tnr');
-
-// auto my reddits horisontal offset
-var rt = $('#header-img').offset().left + $('#header-img').outerWidth() + 20;
-if (($('body').outerWidth() / 2) < rt) {
-	rt = $('body').outerWidth() / 2;
-}
-$('#sr-header-area').offset({ left: rt }).css('left', rt + ' !important');
-
-// auto my reddits vertical offset
-var num = function (value) { /* jsizes */
-	return parseInt(value, 10) || 0;
-};
-//var logo_ht = $('#header-img').offset().top + $('#header-img').outerHeight() - num($('#header-img').css("margin-bottom"));
-var header_ht = $('#header-bottom-left').offset().top + $('#header-bottom-left').outerHeight() - num($('#header-bottom-left').css("padding-bottom"));
-var this_ht = $('#sr-header-area').outerHeight() + $('.sr-list').outerHeight() - num($('.sr-list').css("padding-bottom")) - 1;
-var ht = header_ht - this_ht;
-$('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
-
-// fix misaligned arrow bar, when header is different height
-var ht = $('#header-bottom-right').offset()['top'];
-$('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
-
-// fix content margin-padding
-/*var ht = num($('.content').css("margin-top"))
-var total_ht = ht + num($('.content').css("padding-top"));
-if (ht != 0) {
-	$('.content').css("margin-top", "0 !important");
-	$('.content').css("padding-top", total_ht + " !important");
-}*/
-
-// List view
 $('body').addClass('tnr-collapsed');
 
+
+// add a css class containing the current subreddit name, for custom css files to use
+//  I'm thinking maybe an easy way to have a third-party stylish file, with a bunch of subreddit-specific rules in a single css file
+var subreddit = window.location.pathname.split('/');
+if ((subreddit.length > 2) && (subreddit[1] == 'r')) {
+	$('body').addClass('tnr-r-'+subreddit[2]);
+}
+
+
+// autogenerate the collapsed header offsets, and regenerate once the header image is loaded properly (if needed)
+function generate_header_offsets()
+{
+	// auto my reddits horisontal offset
+	var rt = $('#header-img').offset().left + $('#header-img').outerWidth() + 20;
+	if (($('body').outerWidth() / 2) < rt) {
+		rt = $('body').outerWidth() / 2;
+	}
+	$('#sr-header-area').offset({ left: rt }).css('left', rt + ' !important');
+
+	// auto my reddits vertical offset
+	var num = function (value) { /* jsizes */
+		return parseInt(value, 10) || 0;
+	};
+	//var logo_ht = $('#header-img').offset().top + $('#header-img').outerHeight() - num($('#header-img').css("margin-bottom"));
+	var header_ht = $('#header-bottom-left').offset().top + $('#header-bottom-left').outerHeight() - num($('#header-bottom-left').css("padding-bottom"));
+	var this_ht = $('#sr-header-area').outerHeight() + $('.sr-list').outerHeight() - num($('.sr-list').css("padding-bottom")) - 1;
+	var ht = header_ht - this_ht;
+	$('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
+
+	// fix misaligned arrow bar, when header is different height
+	ht = $('#header-bottom-right').offset()['top'];
+	$('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
+
+	// fix content margin-padding
+	/*var ht = num($('.content').css("margin-top"))
+	var total_ht = ht + num($('.content').css("padding-top"));
+	if (ht != 0) {
+		$('.content').css("margin-top", "0 !important");
+		$('.content').css("padding-top", total_ht + " !important");
+	}*/
+}
+
+generate_header_offsets();
+$('#header-img').load(generate_header_offsets);
+
+
+// Add required buttons and extra divs
 $('<div id="tnr_listview"><span>list view</span></div>').prependTo('#header');
 $('<div id="tnr_collapsedview"><span>collapsed view</span></div>').prependTo('#sr-header-area');
 
@@ -81,11 +98,15 @@ $('body').prepend('<div id="header-bottom-left-background"></div>');
 $('#tnr_listview').css('height', $('#header-bottom-left').outerHeight());
 $('#tnr_listview span').css('margin-top', $('.sr-list').offset().top);
 
+
+// Activate list view, if option is set
 if (GM_getValue("listStyleActive", false)) {
 	$('#tnr_listview').hide();
 	listStyleActivate();
 }
 
+
+// Click handlers, animation and all that fun stuff
 $(document).on('click', '#tnr_listview', function(event) {
 	$('#tnr_listview').slideUp(250);
 	$('#tnr_collapsedview').slideDown(250);
@@ -133,11 +154,10 @@ $(document).on('click', '#tnr_collapsedview', function(event) {
 	});
 });
 
-$(document).on('click', '.tnr-list .sr-list li', function () {
-	window.location = $('a', this).attr('href');
-});
 
-function listStyleActivate() {
+// Plain ole' activate style functions, no animation
+function listStyleActivate()
+{
 	GM_setValue("listStyleActive", true);
 
 	$('body').removeClass('tnr-collapsed');
@@ -171,7 +191,8 @@ function listStyleActivate() {
 	$('#tnr_collapsedview').slideDown(100);*/
 }
 
-function listStyleDeactivate() {
+function listStyleDeactivate()
+{
 	GM_setValue("listStyleActive", false);
 
 	$('body').addClass('tnr-collapsed');
@@ -185,3 +206,9 @@ function listStyleDeactivate() {
 	/*$('#tnr_collapsedview').slideUp(100);
 	$('#tnr_listview').slideDown(100);*/
 }
+
+
+// Helps list view subreddit buttons
+$(document).on('click', '.tnr-list .sr-list li', function () {
+	window.location = $('a', this).attr('href');
+});
