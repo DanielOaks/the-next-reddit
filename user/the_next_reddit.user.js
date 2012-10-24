@@ -7,6 +7,8 @@
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
 
+// https://www.reddit.com/r/Design/comments/wkskp/the_next_reddit_userstyle/
+
 
 // the new reddit style block, for dynamic styles
 var style = document.createElement('style');
@@ -219,11 +221,16 @@ $(document).on('click', '.tnr-list .sr-list li', function () {
 $('body').append('<div id="tnr-version" style="display: none;"></div>'); // version div
 
 var script_css = 1;
-var current_css = parseInt($('#tnr-version').css('width').slice(0,-2));
+var current_css = parseInt($('#tnr-version').css('width').slice(0, -2), 10);
 
 if (script_css > current_css) {
-    console.log('Update CSS, NOOB');
+    notify_sync('Style file seems to be old, click for new version', 'http://userstyles.org/styles/69164/reddit-redesigned');
 }
 else if (current_css > script_css) {
-    console.log('Update Script, NOOB');
+    notify_sync('Script file seems to be old, click for new version', 'https://userscripts.org/scripts/show/138273');
+}
+
+function notify_sync(message, url)
+{
+    console.log(message+'\n    '+url);
 }

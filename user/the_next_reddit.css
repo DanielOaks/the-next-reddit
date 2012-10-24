@@ -467,13 +467,13 @@
         display: block !important;
         width: 100% !important;
         overflow: hidden !important;
-        /*padding-top: 4px !important;*/
+        padding: 2px 0 !important;
     }
     .tnr-list #sr-header-area li:hover {
         background-color: #c4ddef;
     }
     .tnr-list #sr-header-area li a {
-        display: inline-block;
+        display: block;
         padding-left: 20px;
         padding-right: 10px;
         overflow: hidden;
