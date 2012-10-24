@@ -4,6 +4,10 @@
 
 @-moz-document domain("reddit.com") {
 
+    #tnr-version {
+        width: 1px;
+    }
+
     /* Font */
     /*@imp/ort url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic);
     font import functionality not allowed in stylish, bah */
@@ -463,7 +467,7 @@
         display: block !important;
         width: 100% !important;
         overflow: hidden !important;
-        padding-top: 4px;
+        /*padding-top: 4px !important;*/
     }
     .tnr-list #sr-header-area li:hover {
         background-color: #c4ddef;

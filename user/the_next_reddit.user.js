@@ -212,3 +212,18 @@ function listStyleDeactivate()
 $(document).on('click', '.tnr-list .sr-list li', function () {
 	window.location = $('a', this).attr('href');
 });
+
+
+// Displays new style download link, if the css file for this script version is not installed
+//  works by the width of a useless div, set in the css file
+$('body').append('<div id="tnr-version" style="display: none;"></div>'); // version div
+
+var script_css = 1;
+var current_css = parseInt($('#tnr-version').css('width').slice(0,-2));
+
+if (script_css > current_css) {
+	console.log('Update CSS, NOOB');
+}
+else if (current_css > script_css) {
+	console.log('Update Script, NOOB');
+}
