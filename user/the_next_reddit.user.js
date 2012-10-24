@@ -15,24 +15,24 @@ style.type = 'text/css';
 var style_css = "";
 
 function addGlobalStyle_direct(css) {
-   style_css += "\n" + css;
+    style_css += "\n" + css;
 }
 
 function addGlobalStyle(name, css) {
-   style_css += "\n";
-   style_css += name + " {\n";
-   style_css += "    " + css + "\n";
-   style_css += "}";
+    style_css += "\n";
+    style_css += name + " {\n";
+    style_css += "    " + css + "\n";
+    style_css += "}";
 }
 
 function parseGlobalStyle() {
-   var head;
-   head = document.getElementsByTagName('head')[0];
-   if (!head) { return; }
-   head.appendChild(style);
+    var head;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    head.appendChild(style);
 }
 function updateGlobalStyle() {
-   style.innerHTML = "/* The Next Reddit css */" + style_css;
+    style.innerHTML = "/* The Next Reddit css */" + style_css;
 }
 
 updateGlobalStyle();
@@ -48,41 +48,41 @@ $('body').addClass('tnr-collapsed');
 //  I'm thinking maybe an easy way to have a third-party stylish file, with a bunch of subreddit-specific rules in a single css file
 var subreddit = window.location.pathname.split('/');
 if ((subreddit.length > 2) && (subreddit[1] == 'r')) {
-	$('body').addClass('tnr-r-'+subreddit[2]);
+    $('body').addClass('tnr-r-'+subreddit[2]);
 }
 
 
 // autogenerate the collapsed header offsets, and regenerate once the header image is loaded properly (if needed)
 function generate_header_offsets()
 {
-	// auto my reddits horisontal offset
-	var rt = $('#header-img').offset().left + $('#header-img').outerWidth() + 20;
-	if (($('body').outerWidth() / 2) < rt) {
-		rt = $('body').outerWidth() / 2;
-	}
-	$('#sr-header-area').offset({ left: rt }).css('left', rt + ' !important');
+    // auto my reddits horisontal offset
+    var rt = $('#header-img').offset().left + $('#header-img').outerWidth() + 20;
+    if (($('body').outerWidth() / 2) < rt) {
+        rt = $('body').outerWidth() / 2;
+    }
+    $('#sr-header-area').offset({ left: rt }).css('left', rt + ' !important');
 
-	// auto my reddits vertical offset
-	var num = function (value) { /* jsizes */
-		return parseInt(value, 10) || 0;
-	};
-	//var logo_ht = $('#header-img').offset().top + $('#header-img').outerHeight() - num($('#header-img').css("margin-bottom"));
-	var header_ht = $('#header-bottom-left').offset().top + $('#header-bottom-left').outerHeight() - num($('#header-bottom-left').css("padding-bottom"));
-	var this_ht = $('#sr-header-area').outerHeight() + $('.sr-list').outerHeight() - num($('.sr-list').css("padding-bottom")) - 1;
-	var ht = header_ht - this_ht;
-	$('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
+    // auto my reddits vertical offset
+    var num = function (value) { /* jsizes */
+        return parseInt(value, 10) || 0;
+    };
+    //var logo_ht = $('#header-img').offset().top + $('#header-img').outerHeight() - num($('#header-img').css("margin-bottom"));
+    var header_ht = $('#header-bottom-left').offset().top + $('#header-bottom-left').outerHeight() - num($('#header-bottom-left').css("padding-bottom"));
+    var this_ht = $('#sr-header-area').outerHeight() + $('.sr-list').outerHeight() - num($('.sr-list').css("padding-bottom")) - 1;
+    var ht = header_ht - this_ht;
+    $('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
 
-	// fix misaligned arrow bar, when header is different height
-	ht = $('#header-bottom-right').offset()['top'];
-	$('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
+    // fix misaligned arrow bar, when header is different height
+    ht = $('#header-bottom-right').offset()['top'];
+    $('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
 
-	// fix content margin-padding
-	/*var ht = num($('.content').css("margin-top"))
-	var total_ht = ht + num($('.content').css("padding-top"));
-	if (ht != 0) {
-		$('.content').css("margin-top", "0 !important");
-		$('.content').css("padding-top", total_ht + " !important");
-	}*/
+    // fix content margin-padding
+    /*var ht = num($('.content').css("margin-top"))
+    var total_ht = ht + num($('.content').css("padding-top"));
+    if (ht != 0) {
+        $('.content').css("margin-top", "0 !important");
+        $('.content').css("padding-top", total_ht + " !important");
+    }*/
 }
 
 generate_header_offsets();
@@ -101,116 +101,116 @@ $('#tnr_listview span').css('margin-top', $('.sr-list').offset().top);
 
 // Activate list view, if option is set
 if (GM_getValue("listStyleActive", false)) {
-	$('#tnr_listview').hide();
-	listStyleActivate();
+    $('#tnr_listview').hide();
+    listStyleActivate();
 }
 
 
 // Click handlers, animation and all that fun stuff
 $(document).on('click', '#tnr_listview', function(event) {
-	$('#tnr_listview').slideUp(250);
-	$('#tnr_collapsedview').slideDown(250);
+    $('#tnr_listview').slideUp(250);
+    $('#tnr_collapsedview').slideDown(250);
 
-	$('#sr-header-area').slideUp(250);
-	$('#sr-header-area .dropdown').slideUp(250);
-	$('#sr-header-area .sr-list').slideUp(250);
-	$('#tnr_listview').slideUp(250, function () {
-		$('#header-bottom-left-background').animate({width: 163}, 250);
-		$('#header-bottom-left').animate({'margin-left': 163}, 250);
-		$('#header-bottom-left .tabmenu').animate({'margin-left': (163-8)}, 250);
-		$('body > .content').animate({'margin-left': 163}, 250);
-		//$('#header').animate({'background-color': '#ffffff'}, 250);
-		$('.footer-parent').animate({'margin-left': 163}, 250, function () {
-			listStyleActivate();
+    $('#sr-header-area').slideUp(250);
+    $('#sr-header-area .dropdown').slideUp(250);
+    $('#sr-header-area .sr-list').slideUp(250);
+    $('#tnr_listview').slideUp(250, function () {
+        $('#header-bottom-left-background').animate({width: 163}, 250);
+        $('#header-bottom-left').animate({'margin-left': 163}, 250);
+        $('#header-bottom-left .tabmenu').animate({'margin-left': (163-8)}, 250);
+        $('body > .content').animate({'margin-left': 163}, 250);
+        //$('#header').animate({'background-color': '#ffffff'}, 250);
+        $('.footer-parent').animate({'margin-left': 163}, 250, function () {
+            listStyleActivate();
 
-			$('#sr-header-area').slideDown(250);
-			$('#sr-header-area .dropdown').slideDown(250);
-			$('#sr-header-area .sr-list').slideDown(250);
-		});
-	});
+            $('#sr-header-area').slideDown(250);
+            $('#sr-header-area .dropdown').slideDown(250);
+            $('#sr-header-area .sr-list').slideDown(250);
+        });
+    });
 });
 
 $(document).on('click', '#tnr_collapsedview', function(event) {
-	$('#tnr_collapsedview').slideUp(250);
-	$('#tnr_listview').slideDown(250);
+    $('#tnr_collapsedview').slideUp(250);
+    $('#tnr_listview').slideDown(250);
 
-	$('#sr-header-area').slideUp(250);
-	$('#sr-header-area .dropdown').slideUp(250);
-	$('#sr-header-area .sr-list').slideUp(250);
-	$('#tnr_collapsedview').slideUp(250, function () {
-		$('#header-bottom-left-background').animate({width: 0}, 250);
-		$('#header-bottom-left').animate({'margin-left': 0}, 250);
-		$('#header-bottom-left .tabmenu').animate({'margin-left': 0}, 250);
-		$('body > .content').animate({'margin-left': 0}, 250);
-		//$('#header').animate({'background-color': '#ffffff'}, 250);
-		$('.footer-parent').animate({'margin-left': 0}, 250, function () {
-			listStyleDeactivate();
+    $('#sr-header-area').slideUp(250);
+    $('#sr-header-area .dropdown').slideUp(250);
+    $('#sr-header-area .sr-list').slideUp(250);
+    $('#tnr_collapsedview').slideUp(250, function () {
+        $('#header-bottom-left-background').animate({width: 0}, 250);
+        $('#header-bottom-left').animate({'margin-left': 0}, 250);
+        $('#header-bottom-left .tabmenu').animate({'margin-left': 0}, 250);
+        $('body > .content').animate({'margin-left': 0}, 250);
+        //$('#header').animate({'background-color': '#ffffff'}, 250);
+        $('.footer-parent').animate({'margin-left': 0}, 250, function () {
+            listStyleDeactivate();
 
-			$('#sr-header-area').slideDown(250);
-			$('#sr-header-area .dropdown').slideDown(250);
-			$('#sr-header-area .sr-list').slideDown(250);
-			$('#tnr_listview').slideDown(250);
-		});
-	});
+            $('#sr-header-area').slideDown(250);
+            $('#sr-header-area .dropdown').slideDown(250);
+            $('#sr-header-area .sr-list').slideDown(250);
+            $('#tnr_listview').slideDown(250);
+        });
+    });
 });
 
 
 // Plain ole' activate style functions, no animation
 function listStyleActivate()
 {
-	GM_setValue("listStyleActive", true);
+    GM_setValue("listStyleActive", true);
 
-	$('body').removeClass('tnr-collapsed');
-	$('body').addClass('tnr-list');
+    $('body').removeClass('tnr-collapsed');
+    $('body').addClass('tnr-list');
 
-	//$('body').prepend($('.tabmenu'));
-	//$('body').prepend($('#header-bottom-left'));
-	$('body').prepend($('#sr-header-area'));
+    //$('body').prepend($('.tabmenu'));
+    //$('body').prepend($('#header-bottom-left'));
+    $('body').prepend($('#sr-header-area'));
 
-	if (style_css.indexOf(".tnr-list #tnr-list-generated") == -1) {
-		addGlobalStyle(".tnr-list #tnr-list-generated", "/* this just makes sure we don't include css twice */");
+    if (style_css.indexOf(".tnr-list #tnr-list-generated") == -1) {
+        addGlobalStyle(".tnr-list #tnr-list-generated", "/* this just makes sure we don't include css twice */");
 
-		addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: ' + 163 + 'px;');
-		//addGlobalStyle('.tnr-list #sr-header-area li a', 'max-width: ' + ($('#header-bottom-left').outerWidth() - 30) + 'px !important;');
+        addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: ' + 163 + 'px;');
+        //addGlobalStyle('.tnr-list #sr-header-area li a', 'max-width: ' + ($('#header-bottom-left').outerWidth() - 30) + 'px !important;');
 
-		addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: 163px;');
+        addGlobalStyle('.tnr-list #header-bottom-left-background', 'width: 163px;');
 
-		addGlobalStyle(".tnr-list #sr-header-area li a", "max-width: " + (163-30) + "px;");
-		addGlobalStyle(".tnr-list > .content, .tnr-list .footer-parent, .tnr-list #header-bottom-left", "margin-left: 163px !important;");
-		addGlobalStyle(".tnr-list .tabmenu", "margin-left: " + (163-8) + "px !important;");
+        addGlobalStyle(".tnr-list #sr-header-area li a", "max-width: " + (163-30) + "px;");
+        addGlobalStyle(".tnr-list > .content, .tnr-list .footer-parent, .tnr-list #header-bottom-left", "margin-left: 163px !important;");
+        addGlobalStyle(".tnr-list .tabmenu", "margin-left: " + (163-8) + "px !important;");
 
-		addGlobalStyle_direct(".tnr-list #sr-header-area {");
-		addGlobalStyle_direct("    top: 0px !important;");
-		addGlobalStyle_direct("    width: 163px;");
-		addGlobalStyle_direct("}");
+        addGlobalStyle_direct(".tnr-list #sr-header-area {");
+        addGlobalStyle_direct("    top: 0px !important;");
+        addGlobalStyle_direct("    width: 163px;");
+        addGlobalStyle_direct("}");
 
-		updateGlobalStyle();
-	}
+        updateGlobalStyle();
+    }
 
-	/*$('#tnr_listview').slideUp(100);
-	$('#tnr_collapsedview').slideDown(100);*/
+    /*$('#tnr_listview').slideUp(100);
+    $('#tnr_collapsedview').slideDown(100);*/
 }
 
 function listStyleDeactivate()
 {
-	GM_setValue("listStyleActive", false);
+    GM_setValue("listStyleActive", false);
 
-	$('body').addClass('tnr-collapsed');
-	$('body').removeClass('tnr-list');
+    $('body').addClass('tnr-collapsed');
+    $('body').removeClass('tnr-list');
 
-	$('#header-bottom-left').append($('.tabmenu'));
-	$('#header-bottom-right').before($('#header-bottom-left'));
-	$('#header-bottom-left').before($('#sr-header-area'));
-	//$('#header-bottom-left-background').hide();
+    $('#header-bottom-left').append($('.tabmenu'));
+    $('#header-bottom-right').before($('#header-bottom-left'));
+    $('#header-bottom-left').before($('#sr-header-area'));
+    //$('#header-bottom-left-background').hide();
 
-	/*$('#tnr_collapsedview').slideUp(100);
-	$('#tnr_listview').slideDown(100);*/
+    /*$('#tnr_collapsedview').slideUp(100);
+    $('#tnr_listview').slideDown(100);*/
 }
 
 
 // Helps list view subreddit buttons
 $(document).on('click', '.tnr-list .sr-list li', function () {
-	window.location = $('a', this).attr('href');
+    window.location = $('a', this).attr('href');
 });
 
 
@@ -222,8 +222,8 @@ var script_css = 1;
 var current_css = parseInt($('#tnr-version').css('width').slice(0,-2));
 
 if (script_css > current_css) {
-	console.log('Update CSS, NOOB');
+    console.log('Update CSS, NOOB');
 }
 else if (current_css > script_css) {
-	console.log('Update Script, NOOB');
+    console.log('Update Script, NOOB');
 }
