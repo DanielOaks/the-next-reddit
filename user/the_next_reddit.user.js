@@ -75,8 +75,8 @@ function generate_header_offsets()
     $('#sr-header-area').offset({ top: ht }).css('top', ht + ' !important');
 
     // fix misaligned arrow bar, when header is different height
-    ht = $('#header-bottom-right').offset()['top'];
-    $('.tabmenu').offset({ top: ht }).css('top', ht + ' !important');
+    var tabmenu_ht = $('#header-bottom-right').offset()['top'];
+    $('.tabmenu').offset({ top: tabmenu_ht }).css('top', tabmenu_ht + ' !important');
 
     // fix content margin-padding
     /*var ht = num($('.content').css("margin-top"))
@@ -92,11 +92,11 @@ $('#header-img').load(generate_header_offsets);
 
 
 // Add required buttons and extra divs
-$('<div id="tnr_listview"><span>list view</span></div>').prependTo('#header');
-$('<div id="tnr_collapsedview"><span>collapsed view</span></div>').prependTo('#sr-header-area');
+$('<div id="tnr_listview"><span>list view</span></div>').prependTo('#header');  // button to activate list view
+$('<a id="tnr_logo" href="/"></a>').prependTo('#sr-header-area');  // logo in the list view
+$('<div id="tnr_collapsedview"><span>collapsed view</span></div>').appendTo('#sr-header-area');  // button to activate collapsed view
 
-$('body').prepend('<div id="header-bottom-left-background"></div>');
-//$('#sr-more-link').after('<div id="tnr_collapsedview"><span>collapsed view</span></div>');
+$('body').prepend('<div id="header-bottom-left-background"></div>');  // background for the list view list
 $('#tnr_listview').css('height', $('#header-bottom-left').outerHeight());
 $('#tnr_listview span').css('margin-top', $('.sr-list').offset().top);
 
@@ -119,6 +119,7 @@ $(document).on('click', '#tnr_listview', function(event) {
     $('#tnr_listview').slideUp(250, function () {
         $('#header-bottom-left-background').animate({width: 163}, 250);
         $('#header-bottom-left').animate({'margin-left': 163}, 250);
+        $('#header-bottom-left .tabmenu').animate({'top': 0}, 250);
         $('#header-bottom-left .tabmenu').animate({'margin-left': (163-8)}, 250);
         $('body > .content').animate({'margin-left': 163}, 250);
         //$('#header').animate({'background-color': '#ffffff'}, 250);
@@ -142,6 +143,7 @@ $(document).on('click', '#tnr_collapsedview', function(event) {
     $('#tnr_collapsedview').slideUp(250, function () {
         $('#header-bottom-left-background').animate({width: 0}, 250);
         $('#header-bottom-left').animate({'margin-left': 0}, 250);
+        $('#header-bottom-left .tabmenu').animate({'top': tabmenu_ht}, 250);
         $('#header-bottom-left .tabmenu').animate({'margin-left': 0}, 250);
         $('body > .content').animate({'margin-left': 0}, 250);
         //$('#header').animate({'background-color': '#ffffff'}, 250);
@@ -164,6 +166,8 @@ function listStyleActivate()
 
     $('body').removeClass('tnr-collapsed');
     $('body').addClass('tnr-list');
+
+    $('.tabmenu').offset({ top: 0 }).css('top', '0 !important');
 
     //$('body').prepend($('.tabmenu'));
     //$('body').prepend($('#header-bottom-left'));
@@ -199,6 +203,8 @@ function listStyleDeactivate()
 
     $('body').addClass('tnr-collapsed');
     $('body').removeClass('tnr-list');
+
+    $('.tabmenu').offset({ top: tabmenu_ht }).css('top', tabmenu_ht + ' !important');
 
     $('#header-bottom-left').append($('.tabmenu'));
     $('#header-bottom-right').before($('#header-bottom-left'));
