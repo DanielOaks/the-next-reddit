@@ -76,7 +76,7 @@ function generate_header_offsets()
 
     // fix misaligned arrow bar, when header is different height
     var tabmenu_ht = $('#header-bottom-right').offset()['top'];
-    $('.tabmenu').offset({ top: tabmenu_ht }).css('top', tabmenu_ht + ' !important');
+    $('.tabmenu').offset({ top: tabmenu_ht });
 
     // fix content margin-padding
     /*var ht = num($('.content').css("margin-top"))
@@ -119,8 +119,7 @@ $(document).on('click', '#tnr_listview', function(event) {
     $('#tnr_listview').slideUp(250, function () {
         $('#header-bottom-left-background').animate({width: 163}, 250);
         $('#header-bottom-left').animate({'margin-left': 163}, 250);
-        $('#header-bottom-left .tabmenu').animate({'top': 0}, 250);
-        $('#header-bottom-left .tabmenu').animate({'margin-left': (163-8)}, 250);
+        $('#header-bottom-left .tabmenu').animate({'margin-left': (163-8), 'top': 0}, 250);
         $('body > .content').animate({'margin-left': 163}, 250);
         //$('#header').animate({'background-color': '#ffffff'}, 250);
         $('.footer-parent').animate({'margin-left': 163}, 250, function () {
@@ -143,7 +142,7 @@ $(document).on('click', '#tnr_collapsedview', function(event) {
     $('#tnr_collapsedview').slideUp(250, function () {
         $('#header-bottom-left-background').animate({width: 0}, 250);
         $('#header-bottom-left').animate({'margin-left': 0}, 250);
-        $('#header-bottom-left .tabmenu').animate({'top': tabmenu_ht}, 250);
+        //$('#header-bottom-left .tabmenu').animate({'margin-left': 0, 'top': tabmenu_ht}, 250);
         $('#header-bottom-left .tabmenu').animate({'margin-left': 0}, 250);
         $('body > .content').animate({'margin-left': 0}, 250);
         //$('#header').animate({'background-color': '#ffffff'}, 250);
@@ -204,7 +203,7 @@ function listStyleDeactivate()
     $('body').addClass('tnr-collapsed');
     $('body').removeClass('tnr-list');
 
-    $('.tabmenu').offset({ top: tabmenu_ht }).css('top', tabmenu_ht + ' !important');
+    //$('.tabmenu').offset({ top: tabmenu_ht }).css('top', tabmenu_ht + ' !important');
 
     $('#header-bottom-left').append($('.tabmenu'));
     $('#header-bottom-right').before($('#header-bottom-left'));
