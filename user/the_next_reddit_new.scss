@@ -11,81 +11,81 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
         width: 1px;  // keep synced with tnr-version var in js file
     }
 
-    .tnr {
+    html body.tnr {
 
         // global rules
         overflow-x: hidden;
-        font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif;
+        font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif !important;
 
         // floating My Reddits list
         #sr-header-area {
             position: absolute;
             top: 24px;
             left: 160px;
-            overflow: visible;
+            overflow: visible !important;
             max-width: 86%;
-            border-bottom: none;
-            background: none;
-            font-size: 105%;
+            border-bottom: none !important;
+            background: none !important;
+            font-size: 105% !important;
         }
         #sr-header-area .width-clip {
-            position: relative;
+            position: relative !important;
         }
         #sr-header-area .sr-list {
             position: relative;
             float: left;
             clear: left;  // floar underneath dropdown
-            padding-bottom: 1px;
-            padding-left: 5px;
+            padding-bottom: 1px !important;
+            padding-left: 5px !important;
         }
         #header-bottom-left .redditname, #header-bottom-left .pagename {
-            display: none;  // overlaps with my reddits list
+            display: none !important;  // overlaps with my reddits list
         }
         .sr-bar a {
-            color: #306496;
+            color: #306496 !important;
         }
         #sr-header-area .selected a {
-            color: #ff410c;
+            color: #ff410c !important;
         }
         .sr-bar .separator {
             visibility: hidden;
-            margin: 0 5px;
+            margin: 0 5px !important;
         }
         .sr-list .separator:nth-child(2) {
-            margin: 0 12px;
+            margin: 0 12px !important;
         }
         .dropdown.srdrop .selected {
-            margin-right: 5px;
-            padding-right: 14px;
-            background-image: inline-image('arrowselected.png');
-            background-position: right 8px;
-            color: black;
-            font-weight: normal;
+            margin-right: 5px !important;
+            padding-right: 14px !important;
+            background-image: inline-image('arrowdown.png') !important;
+            background-position: right 8px !important;
+            color: black !important;
+            font-weight: normal !important;
         }
 
         // my-reddit list background
         &.tnr-collapsed {
             #sr-header-area .dropdown {
                 @include border-radius(3px 3px 0 0);
-                background-color: #e7f1fa;
+                background-color: #e7f1fa !important;
             }
             .sr-list {
                 @include border-radius(0 3px 3px 3px);
-                background-color: #e7f1fa;
+                background-color: #e7f1fa !important;
             }
         }
 
         // header
         #header {
-            border-bottom: none;
+            border-bottom: none !important;
         }
         &.tnr-collapsed {
             #header {
-                background-color: #e7f1fa;
+                background-color: #e7f1fa !important;
             }
             #header-bottom-left {
-                padding-top: 15px;
-                padding-bottom: 15px;
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
             }
             #header-img {
                 margin-left: 13px;
@@ -102,34 +102,34 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
                 height: 0;
             }
             #header-img, .pagename, .redditname {
-                display: none;
+                display: none !important;
             }
         }
     
         // Userbar List, etc
         #header-bottom-right {
-            position: relative;
-            float: left;
-            padding: 10px 5px 12px 0;
+            position: relative !important;
+            float: left !important;
+            padding: 10px 5px 12px 0 !important;
             
             width: 100%;
-            border-top-left-radius: 0;
+            border-top-left-radius: 0 !important;
             text-align: right;
             
             font-size: 115%;
         }
         #header-bottom-right a {
-            color: #336699;
+            color: #336699 !important;
         }
         &.tnr-collapsed #header-bottom-right {
             border: 1px solid #fff;
             border-width: 1px 0;
             border-color: #fff transparent #fff;
             
-            background: #e9f0f7; // Old browsers
-            @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%));
+            background: #e9f0f7 !important; // Old browsers
+            @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
             box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
-            color: #336699;
+            color: #336699 !important;
         }
         &.tnr-list #header-bottom-right {
             border-top: 1px solid transparent;
@@ -141,90 +141,95 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
         }
         #mail {
             @extend #modmail;
-            top: 1px;
+            top: 1px !important;
         }
         .pref-lang {
-            font-weight: normal;
+            font-weight: normal !important;
         }
         #header-bottom-right .logout {
             display: inline-block;
-            margin-right: 22px;
+            margin-right: 22px !important;
         }
         .tabmenu {
             position: absolute;
-            top: 75px;
             left: 38px;
             z-index: 1;
-            margin-top: 0;
-            padding-top: 9px;
+            margin-top: 0 !important;
+            padding-top: 9px !important;
             font-size: 80%;
+        }
+        &.tnr-collapsed .tabmenu {
+            top: 75px !important;
+        }
+        &.tnr-list .tabmenu {
+            top: 0 !important;
         }
         .tabmenu.formtab {
             z-index: 999999;
         }
         .tabmenu li {
-            display: inline-block;
-            height: 28px;
+            display: inline-block !important;
+            height: 28px !important;
         }
         .tabmenu li.selected {
-            background: no-repeat bottom center inline-image('arrowselected.png');
+            background: no-repeat bottom center inline-image('arrowselected.png') !important;
         }
         .tabmenu li a {
-            border: none;
-            background: none;
-            font-weight: bold;
+            border: none !important;
+            background: none !important;
+            font-weight: bold !important;
             font-size: 125%;
         }
         .tabmenu li:not(.selected) a {
-            color: #336699;
+            color: #336699 !important;
         }
         .tabmenu li:selected a {
-            color: orangered;
+            color: orangered !important;
         }
         .tabmenu.formtab li {
-            font-weight: bold;
+            font-weight: bold !important;
             font-size: 80%;
         }
         .tabmenu.formtab .selected a {
-            color: orangered;
-            font-size: 125%;
+            color: orangered !important;
+            font-size: 125% !important;
         }
         #header-bottom-right .separator {
             visibility: hidden;
         }
         #header-bottom-right .separator:nth-last-child(-n+2) {
             visibility: visible;
-            margin: 0 12px;
+            margin: 0 12px !important;
         }
         .user .userkarma {
             margin: 0 3px;
-            border-bottom: 1px dotted #999;
+            border-bottom: 1px dotted #999 !important;
         }
     
         // Side
         .side {
-            margin-top: 5px;
-            padding-right: 20px;
-            padding-left: 20px;
+            margin-top: 5px !important;
+            padding-right: 20px !important;
+            padding-left: 20px !important;
         }
         .side .spacer {
-            margin: 17px 0 22px;
+            margin: 17px 0 22px !important;
         }
         #search input[type="text"] {
-            padding: 5px 16px 6px;
-            width: 266px;
-            border-color: #c6c6c6;
+            padding: 5px 16px 6px !important;
+            width: 266px !important;
+            border-color: #c6c6c6 !important;
             @include border-radius(5px);
         }
         .morelink {
-            margin: 0 auto;
-            padding: 4px 0 5px;
+            margin: 0 auto !important;
+            padding: 4px 0 5px !important;
             width: 87%;
             border: 1px solid #c6deea;
             @include border-radius(5px);
 
-            background: #f5faff; // Old browsers
-            @include background(linear-gradient(top, #f5faff, #c6deea));
+            background: #f5faff !important; // Old browsers
+            @include background(linear-gradient(top, #f5faff, #c6deea) !important);
         }
         .morelink .nub {
             display: none;
@@ -235,104 +240,93 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
             font-weight: normal;
         }
         .morelink:hover a {
-            color: #114477;
+            color: #114477 !important;
         }
         .sidebox .subtitle {
-            margin-right: 35px;
+            margin-right: 35px !important;
         }
         .sidebox .spacer a {
-            top: -45px;
-            left: 32px;
+            top: -45px !important;
+            left: 32px !important;
         }
         .spacer .sidebox .spacer {
-            margin-top: 0;
-            margin-bottom: 10px;
-            padding-left: 25px;
+            margin-top: 0 !important;
+            margin-bottom: 10px !important;
+            padding-left: 25px !important;
         }
         .side .sidecontentbox .title h1 {
-            display: inline-block;
-            margin-bottom: 3px;
-            font-weight: bold;
-            font-size: 110%;
+            display: inline-block !important;
+            margin-bottom: 3px !important;
+            font-weight: bold !important;
+            font-size: 110% !important;
         }
         .side .sidecontentbox .content {
-            padding: 17px;
-            border-color: #c6c6c6;
+            padding: 17px !important;
+            border-color: #c6c6c6 !important;
         }
         .side .sidecontentbox .content .gadget .reddit-link {
-            padding-bottom: 7px;
+            padding-bottom: 7px !important;
         }
         .side .sidecontentbox .content .gadget .reddit-entry {
-            margin-left: 30px;
+            margin-left: 30px !important;
         }
     
         // Links
         .link {
-            margin-top: 15px;
+            margin-top: 15px !important;
         }
         .link .rank {
-            margin-top: 17px;
+            margin-top: 17px !important;
             margin-right: 8px;
             margin-left: 3px;
-            font-size: small;
+            font-size: small !important;
         }
         .link .midcol {
-            margin-right: 17px;
+            margin-right: 17px !important;
         }
         .link .flat-list {
-            padding: 3px 0 4px;
-            font-size: 105%;
+            padding: 3px 0 4px !important;
+            font-size: 105% !important;
         }
         .tagline {
-            margin-top: -3px;
-            font-size: 110%;
+            margin-top: -3px !important;
+            font-size: 110% !important;
         }
         
         .content, .side {
-            clear: left;
+            clear: left !important;
         }
         .content {
-            padding-top: 1px;
+            padding-top: 1px !important;
         }
     
         // next-prev
         .nextprev {
-            margin-top: 30px;
-            margin-left: 29px;
-            font-size: 150%;
+            margin-top: 30px !important;
+            margin-left: 29px !important;
+            font-size: 150% !important;
         }
         .nextprev a {
-            margin-left: 20px;
-            padding: 5px 21px;
+            margin-left: 20px !important;
+            padding: 5px 21px !important;
             
-            border: 1px solid #c6deea;
-            @include border-radius(4px);
+            border: 1px solid #c6deea !important;
+            @include border-radius(4px !important);
             
-            background: #f5faff; // Old browsers
-            @include background(linear-gradient(top, #f5faff, #c6deea));
-        }
-        
-        .mordelink {  // TODO, remove? seems like test code
-            margin: 0 auto;
-            padding: 4px 0 5px;
-            width: 87%;
-            border: 1px solid #c6deea;
-            @include border-radius(5px);
-            
-            background: #f5faff; // Old browsers
-            @include background(linear-gradient(top, #f5faff, #c6deea));
+            background: #f5faff !important; // Old browsers
+            @include background(linear-gradient(top, #f5faff, #c6deea) !important);
         }
         
         // footer
         .footer-parent {
-        padding-top: 13px;
-            text-align: left;
+            padding-top: 13px !important;
+            text-align: left !important;
         }
         .bottommenu {
-            margin-left: 36px;
+            margin-left: 36px !important;
         }
     
-        // list view button, added by js script
+        // list view button, added by js
         #tnr_listview {
             position: absolute;
             top: 0;
@@ -359,48 +353,48 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
     
         // Reddit Enhancement Suite fixes
         #header-bottom-right.res-navTop {
-            top: 0;
+            top: 0 !important;
         }
         &.res {
             .tabmenu {
-                padding-top: 11px;
+                padding-top: 11px !important;
             }
             .tabmenu li.selected {
-                height: 31px;
+                height: 31px !important;
             }
             #sr-header-area {
                 width: 450px;
             }
             #sr-header-area .sr-bar {
-                display: block;
-                float: left;
-                width: 100%;
+                display: block !important;
+                float: left !important;
+                width: 100% !important;
             }
             #RESShortcutsEditContainer {
                 float: right;
-                margin-top: 2px;
-                background: none;
+                margin-top: 2px !important;
+                background: none !important;
             }
             #RESShortcutsEditContainer div {
-                background: none;
+                background: none !important;
             }
             .srSep {
                 display: none;
             }
             #RESShortcutsViewport {
-                margin-left: 2px;
+                margin-left: 2px !important;
             }
             
             #sr-header-area {
                 @include border-radius(3px 3px 3px 0);
-                background-color: #e7f1fa;
+                background-color: #e7f1fa !important;
             }
             #RESShortcutsViewport {
                 @include border-radius(0 3px 3px 3px);
-                background-color: #e7f1fa;
+                background-color: #e7f1fa !important;
             }
             #sr-header-area #RESShortcutsViewport #RESShortcuts {
-                width: 200px;
+                width: 200px !important;
             }
         }
     
@@ -411,41 +405,44 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
         // min-width: 163px;
         // width: auto;
         #header-bottom-left-background {
-            position: fixed;
-            height: 100%;
+            position: fixed !important;
+            height: 100% !important;
             
             border-right: 1px solid #b9b9d5;
 
-            background: #eef4fa; // Old browsers
-            @include background(linear-gradient(left, #eef4fa 83%, #e6ecf3));
+            background: #eef4fa !important; // Old browsers
+            @include background(linear-gradient(left, #eef4fa 83%, #e6ecf3) !important);
+        }
+        #tnr_collapsedview {
+            display: none;
         }
         &.tnr-list {
             #header {
-                border-bottom: none;
-                background: none;
+                border-bottom: none !important;
+                background: none !important;
             }
             #header-bottom-right {
-                box-shadow: 0 1px 0 #DBE2E8;
+                box-shadow: 0 1px 0 #DBE2E8 !important;
             }
             .tabmenu {
-                z-index: 453;
+                z-index: 453 !important;
             }
             #header-bottom-right {
-                background: #fff;
+                background: #fff !important;
             }
             .sr-list {
-                background: none;
+                background: none !important;
             }
             #sr-header-area {
-                left: 0;
+                left: 0 !important;
             }
             #sr-header-area .sr-list {
                 float: none;
-                padding: 0;
+                padding: 0 !important;
                 @include border-radius(0);
             }
             #sr-header-area .dropdown {
-                display: none;
+                display: none !important;
             }
             #sr-header-area .separator {
                 visibility: hidden;
@@ -454,10 +451,10 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
                 display: none;
             }
             #sr-header-area li {
-                display: block;
-                overflow: hidden;
-                padding: 2px 0;
-                width: 100%;
+                display: block !important;
+                overflow: hidden !important;
+                padding: 2px 0 !important;
+                width: 100% !important;
             }
             #sr-header-area li:hover {
                 background-color: #c4ddef;
@@ -470,18 +467,18 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
                 text-overflow: ellipsis;
             }
             #sr-header-area li a:hover {
-                text-decoration: none;
+                text-decoration: none !important;
             }
             #sr-header-area #sr-more-link {
-                position: static;
-                display: block;
-                margin-top: 10px;
-                padding-left: 20px;
-                background: none;
+                position: static !important;
+                display: block !important;
+                margin-top: 10px !important;
+                padding-left: 20px !important;
+                background: none !important;
             }
             #sr-header-area #sr-more-link:hover {
-                background-color: #c4ddef;
-                text-decoration: none;
+                background-color: #c4ddef !important;
+                text-decoration: none !important;
             }
             #header-bottom-left {
                 z-index: 56754;
@@ -496,12 +493,9 @@ $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
                 z-index: 451;
             }
             #tnr_collapsedview {
-                display: none;
-            }
-            #tnr_collapsedview {
                 display: block;
-                margin-top: 18px;
-                padding: 14px 5px 42px 17px;
+                margin-top: 18px !important;
+                padding: 14px 5px 42px 17px !important;
                 border-top: 1px solid #b9c9e5;
                 border-bottom: 1px solid #b9c9e5;
                 background-color: #c9d9e5;
