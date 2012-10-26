@@ -1,4 +1,5 @@
 @namespace url(http://www.w3.org/1999/xhtml);
+/* https://www.reddit.com/r/Design/comments/wbl6i/the_next_reddit_a_responsible_redesign/ */
 @-moz-document domain("reddit.com") {
   #tnr-version {
     width: 1px;
