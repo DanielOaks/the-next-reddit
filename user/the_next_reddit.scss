@@ -11,6 +11,25 @@ html body.tnr {
         width: 1px;  // keep synced with tnr-version var in js file
     }
 
+    #tnr-update {
+        float: right;
+        padding: 10px 13px;
+        background-color: #e7f1fa;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        @include border-radius(5px 0 0 0);
+
+        border: 1px solid #fff;
+        
+        background: #e9f0f7 !important; // Old browsers
+        @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
+        box-shadow: -1px -1px 0 #DBE2E8;
+        color: #336699 !important;
+
+        font-size: 115%;
+    }
+
     // global rules
     overflow-x: hidden;
     font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif !important;
@@ -108,7 +127,7 @@ html body.tnr {
     #header-bottom-right {
         position: relative !important;
         float: left !important;
-        padding: 10px 5px 12px 0 !important;
+        padding: 10px 0 12px 0 !important;
         
         width: 100%;
         border-top-left-radius: 0 !important;
@@ -119,15 +138,20 @@ html body.tnr {
     #header-bottom-right a {
         color: #336699 !important;
     }
-    &.tnr-collapsed #header-bottom-right {
-        border: 1px solid #fff;
-        border-width: 1px 0;
-        border-color: #fff transparent #fff;
-        
-        background: #e9f0f7 !important; // Old browsers
-        @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
-        box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
-        color: #336699 !important;
+    &.tnr-collapsed {
+        #header-bottom-right {
+            border: 1px solid #fff;
+            border-width: 1px 0;
+            border-color: #fff transparent #fff;
+            
+            background: #e9f0f7 !important; // Old browsers
+            @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
+            box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
+            color: #336699 !important;
+        }
+        #header-bottom-right > *:last-child {
+            margin-right: 15px !important;
+        }
     }
     &.tnr-list #header-bottom-right {
         border-top: 1px solid transparent;

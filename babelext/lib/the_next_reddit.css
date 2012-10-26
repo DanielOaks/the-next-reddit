@@ -7,6 +7,30 @@ html body.tnr {
 html body.tnr #tnr-version {
   width: 1px;
 }
+html body.tnr #tnr-update {
+  float: right;
+  padding: 10px 13px;
+  background-color: #e7f1fa;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+  -ms-border-radius: 5px 0 0 0;
+  -o-border-radius: 5px 0 0 0;
+  border-radius: 5px 0 0 0;
+  border: 1px solid #fff;
+  background: #e9f0f7 !important;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U5ZjBmNyIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZjVmYWZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g') !important;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e9f0f7), color-stop(40%, #f5faff)) !important;
+  background: -webkit-linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important;
+  background: -moz-linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important;
+  background: -o-linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important;
+  background: linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important;
+  box-shadow: -1px -1px 0 #dbe2e8;
+  color: #336699 !important;
+  font-size: 115%;
+}
 html body.tnr #sr-header-area {
   position: absolute;
   top: 24px;
@@ -95,7 +119,7 @@ html body.tnr.tnr-list #header-img, html body.tnr.tnr-list .pagename, html body.
 html body.tnr #header-bottom-right {
   position: relative !important;
   float: left !important;
-  padding: 10px 5px 12px 0 !important;
+  padding: 10px 0 12px 0 !important;
   width: 100%;
   border-top-left-radius: 0 !important;
   text-align: right;
@@ -117,6 +141,9 @@ html body.tnr.tnr-collapsed #header-bottom-right {
   background: linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important;
   box-shadow: 0 1px 0 #dbe2e8, 0 -1px 0 #dbe2e8;
   color: #336699 !important;
+}
+html body.tnr.tnr-collapsed #header-bottom-right > *:last-child {
+  margin-right: 15px !important;
 }
 html body.tnr.tnr-list #header-bottom-right {
   border-top: 1px solid transparent;

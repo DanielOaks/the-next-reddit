@@ -10,26 +10,19 @@
 // https://www.reddit.com/r/Design/comments/wkskp/the_next_reddit_userstyle/
 
 
-// TODO:
-//    - rewrite css using css preprocessor, rewrite javascript to not be as hacky and dumb
-
-// allow this to work as both a greasemonkey script and babelext
+// allows this to work as both a greasemonkey script and babelext
 function BE_setValue(key, val, callback) {
     if (typeof(BabelExt) != 'undefined') {
-        console.log('BabelExt Exists');
         BabelExt.storage.set(key, val, callback);
     } else {
-        console.log('Going with Greasemonkey instead');
         GM_setValue(key, val);
         callback.call();
     }
 }
 function BE_getValue(key, def, callback) {
     if (typeof(BabelExt) != 'undefined') {
-        console.log('BabelExt Exists');
         BabelExt.storage.get(key, callback);
     } else {
-        console.log('Going with Greasemonkey instead');
         callback.call(this, GM_getValue(key, def));
     }
 }
@@ -259,13 +252,13 @@ var script_css = 1;
 var current_css = parseInt($('#tnr-version').css('width').slice(0, -2), 10);
 
 if (script_css > current_css) {
-    notify_sync('Style file seems to be old, click for new version', 'http://userstyles.org/styles/69164/reddit-redesigned');
+    notify_sync('Style file is old, click here to update', 'http://userstyles.org/styles/69164/reddit-redesigned');
 }
 else if (current_css > script_css) {
-    notify_sync('Script file seems to be old, click for new version', 'https://userscripts.org/scripts/show/138273');
+    notify_sync('Script file is old, click here to update', 'https://userscripts.org/scripts/show/138273');
 }
 
 function notify_sync(message, url)
 {
-    console.log(message+'\n    '+url);
+    $('<a id="tnr-update"></a>').text(message).attr('href', url).appendTo($('body'));
 }
