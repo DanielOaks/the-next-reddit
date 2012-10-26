@@ -10,6 +10,13 @@
 // https://www.reddit.com/r/Design/comments/wkskp/the_next_reddit_userstyle/
 
 
+// TODO:
+//    - rewrite css using css preprocessor, rewrite javascript to not be as hacky and dumb
+
+
+// add the Open Sans font files via Google Web Fonts
+$('<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open%20Sans:n,b,bi,i">').prependTo($('head'));
+
 // the new reddit style block, for dynamic styles
 var style = document.createElement('style');
 style.type = 'text/css';

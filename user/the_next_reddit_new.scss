@@ -1,0 +1,530 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+// https://www.reddit.com/r/Design/comments/wbl6i/the_next_reddit_a_responsible_redesign/
+
+@import "compass";
+$experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
+
+@-moz-document domain("reddit.com") {
+
+    #tnr-version {
+        width: 1px;  // keep synced with tnr-version var in js file
+    }
+
+    .tnr {
+
+        // global rules
+        overflow-x: hidden;
+        font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif;
+
+        // floating My Reddits list
+        #sr-header-area {
+            position: absolute;
+            top: 24px;
+            left: 160px;
+            overflow: visible;
+            max-width: 86%;
+            border-bottom: none;
+            background: none;
+            font-size: 105%;
+        }
+        #sr-header-area .width-clip {
+            position: relative;
+        }
+        #sr-header-area .sr-list {
+            position: relative;
+            float: left;
+            clear: left;  // floar underneath dropdown
+            padding-bottom: 1px;
+            padding-left: 5px;
+        }
+        #header-bottom-left .redditname, #header-bottom-left .pagename {
+            display: none;  // overlaps with my reddits list
+        }
+        .sr-bar a {
+            color: #306496;
+        }
+        #sr-header-area .selected a {
+            color: #ff410c;
+        }
+        .sr-bar .separator {
+            visibility: hidden;
+            margin: 0 5px;
+        }
+        .sr-list .separator:nth-child(2) {
+            margin: 0 12px;
+        }
+        .dropdown.srdrop .selected {
+            margin-right: 5px;
+            padding-right: 14px;
+            background-image: inline-image('arrowselected.png');
+            background-position: right 8px;
+            color: black;
+            font-weight: normal;
+        }
+
+        // my-reddit list background
+        &.tnr-collapsed {
+            #sr-header-area .dropdown {
+                @include border-radius(3px 3px 0 0);
+                background-color: #e7f1fa;
+            }
+            .sr-list {
+                @include border-radius(0 3px 3px 3px);
+                background-color: #e7f1fa;
+            }
+        }
+
+        // header
+        #header {
+            border-bottom: none;
+        }
+        &.tnr-collapsed {
+            #header {
+                background-color: #e7f1fa;
+            }
+            #header-bottom-left {
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            #header-img {
+                margin-left: 13px;
+            }
+        }
+        &.tnr-list {
+            #tnr_logo {
+                display: block;
+                width: 100%;
+                height: 72px;
+                background: center center no-repeat inline-image('reddit_logo.png');
+            }
+            #header-bottom-left {
+                height: 0;
+            }
+            #header-img, .pagename, .redditname {
+                display: none;
+            }
+        }
+    
+        // Userbar List, etc
+        #header-bottom-right {
+            position: relative;
+            float: left;
+            padding: 10px 5px 12px 0;
+            
+            width: 100%;
+            border-top-left-radius: 0;
+            text-align: right;
+            
+            font-size: 115%;
+        }
+        #header-bottom-right a {
+            color: #336699;
+        }
+        &.tnr-collapsed #header-bottom-right {
+            border: 1px solid #fff;
+            border-width: 1px 0;
+            border-color: #fff transparent #fff;
+            
+            background: #e9f0f7; // Old browsers
+            @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%));
+            box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
+            color: #336699;
+        }
+        &.tnr-list #header-bottom-right {
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+        }
+
+        #modmail {
+            text-align: left;  // remove text
+        }
+        #mail {
+            @extend #modmail;
+            top: 1px;
+        }
+        .pref-lang {
+            font-weight: normal;
+        }
+        #header-bottom-right .logout {
+            display: inline-block;
+            margin-right: 22px;
+        }
+        .tabmenu {
+            position: absolute;
+            top: 75px;
+            left: 38px;
+            z-index: 1;
+            margin-top: 0;
+            padding-top: 9px;
+            font-size: 80%;
+        }
+        .tabmenu.formtab {
+            z-index: 999999;
+        }
+        .tabmenu li {
+            display: inline-block;
+            height: 28px;
+        }
+        .tabmenu li.selected {
+            background: no-repeat bottom center inline-image('arrowselected.png');
+        }
+        .tabmenu li a {
+            border: none;
+            background: none;
+            font-weight: bold;
+            font-size: 125%;
+        }
+        .tabmenu li:not(.selected) a {
+            color: #336699;
+        }
+        .tabmenu li:selected a {
+            color: orangered;
+        }
+        .tabmenu.formtab li {
+            font-weight: bold;
+            font-size: 80%;
+        }
+        .tabmenu.formtab .selected a {
+            color: orangered;
+            font-size: 125%;
+        }
+        #header-bottom-right .separator {
+            visibility: hidden;
+        }
+        #header-bottom-right .separator:nth-last-child(-n+2) {
+            visibility: visible;
+            margin: 0 12px;
+        }
+        .user .userkarma {
+            margin: 0 3px;
+            border-bottom: 1px dotted #999;
+        }
+    
+        // Side
+        .side {
+            margin-top: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+        .side .spacer {
+            margin: 17px 0 22px;
+        }
+        #search input[type="text"] {
+            padding: 5px 16px 6px;
+            width: 266px;
+            border-color: #c6c6c6;
+            @include border-radius(5px);
+        }
+        .morelink {
+            margin: 0 auto;
+            padding: 4px 0 5px;
+            width: 87%;
+            border: 1px solid #c6deea;
+            @include border-radius(5px);
+
+            background: #f5faff; // Old browsers
+            @include background(linear-gradient(top, #f5faff, #c6deea));
+        }
+        .morelink .nub {
+            display: none;
+        }
+        
+        .morelink a {
+            margin-left: 20px;
+            font-weight: normal;
+        }
+        .morelink:hover a {
+            color: #114477;
+        }
+        .sidebox .subtitle {
+            margin-right: 35px;
+        }
+        .sidebox .spacer a {
+            top: -45px;
+            left: 32px;
+        }
+        .spacer .sidebox .spacer {
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+        .side .sidecontentbox .title h1 {
+            display: inline-block;
+            margin-bottom: 3px;
+            font-weight: bold;
+            font-size: 110%;
+        }
+        .side .sidecontentbox .content {
+            padding: 17px;
+            border-color: #c6c6c6;
+        }
+        .side .sidecontentbox .content .gadget .reddit-link {
+            padding-bottom: 7px;
+        }
+        .side .sidecontentbox .content .gadget .reddit-entry {
+            margin-left: 30px;
+        }
+    
+        // Links
+        .link {
+            margin-top: 15px;
+        }
+        .link .rank {
+            margin-top: 17px;
+            margin-right: 8px;
+            margin-left: 3px;
+            font-size: small;
+        }
+        .link .midcol {
+            margin-right: 17px;
+        }
+        .link .flat-list {
+            padding: 3px 0 4px;
+            font-size: 105%;
+        }
+        .tagline {
+            margin-top: -3px;
+            font-size: 110%;
+        }
+        
+        .content, .side {
+            clear: left;
+        }
+        .content {
+            padding-top: 1px;
+        }
+    
+        // next-prev
+        .nextprev {
+            margin-top: 30px;
+            margin-left: 29px;
+            font-size: 150%;
+        }
+        .nextprev a {
+            margin-left: 20px;
+            padding: 5px 21px;
+            
+            border: 1px solid #c6deea;
+            @include border-radius(4px);
+            
+            background: #f5faff; // Old browsers
+            @include background(linear-gradient(top, #f5faff, #c6deea));
+        }
+        
+        .mordelink {  // TODO, remove? seems like test code
+            margin: 0 auto;
+            padding: 4px 0 5px;
+            width: 87%;
+            border: 1px solid #c6deea;
+            @include border-radius(5px);
+            
+            background: #f5faff; // Old browsers
+            @include background(linear-gradient(top, #f5faff, #c6deea));
+        }
+        
+        // footer
+        .footer-parent {
+        padding-top: 13px;
+            text-align: left;
+        }
+        .bottommenu {
+            margin-left: 36px;
+        }
+    
+        // list view button, added by js script
+        #tnr_listview {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1234;
+            background: #c9d9e5;
+            cursor: pointer;
+        }
+        #tnr_listview span {
+            display: block;
+            margin: 43px 11px 0 18px;
+            padding: 0 16px 0 0;
+            background: no-repeat right 5px inline-image('arrowlist.png');
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 125%;
+        }
+        #tnr_listview:hover {
+            background-color: #b9c9d5;
+        }
+        #tnr_listview:hover span {
+            background-image: inline-image('arrowlist_hover.png');
+        }
+    
+        // Reddit Enhancement Suite fixes
+        #header-bottom-right.res-navTop {
+            top: 0;
+        }
+        &.res {
+            .tabmenu {
+                padding-top: 11px;
+            }
+            .tabmenu li.selected {
+                height: 31px;
+            }
+            #sr-header-area {
+                width: 450px;
+            }
+            #sr-header-area .sr-bar {
+                display: block;
+                float: left;
+                width: 100%;
+            }
+            #RESShortcutsEditContainer {
+                float: right;
+                margin-top: 2px;
+                background: none;
+            }
+            #RESShortcutsEditContainer div {
+                background: none;
+            }
+            .srSep {
+                display: none;
+            }
+            #RESShortcutsViewport {
+                margin-left: 2px;
+            }
+            
+            #sr-header-area {
+                @include border-radius(3px 3px 3px 0);
+                background-color: #e7f1fa;
+            }
+            #RESShortcutsViewport {
+                @include border-radius(0 3px 3px 3px);
+                background-color: #e7f1fa;
+            }
+            #sr-header-area #RESShortcutsViewport #RESShortcuts {
+                width: 200px;
+            }
+        }
+    
+        // list view
+        // .tnr-list #header-bottom-left {
+        //  position: absolute;
+        // padding: 20px;
+        // min-width: 163px;
+        // width: auto;
+        #header-bottom-left-background {
+            position: fixed;
+            height: 100%;
+            
+            border-right: 1px solid #b9b9d5;
+
+            background: #eef4fa; // Old browsers
+            @include background(linear-gradient(left, #eef4fa 83%, #e6ecf3));
+        }
+        &.tnr-list {
+            #header {
+                border-bottom: none;
+                background: none;
+            }
+            #header-bottom-right {
+                box-shadow: 0 1px 0 #DBE2E8;
+            }
+            .tabmenu {
+                z-index: 453;
+            }
+            #header-bottom-right {
+                background: #fff;
+            }
+            .sr-list {
+                background: none;
+            }
+            #sr-header-area {
+                left: 0;
+            }
+            #sr-header-area .sr-list {
+                float: none;
+                padding: 0;
+                @include border-radius(0);
+            }
+            #sr-header-area .dropdown {
+                display: none;
+            }
+            #sr-header-area .separator {
+                visibility: hidden;
+            }
+            #sr-header-area li .separator {
+                display: none;
+            }
+            #sr-header-area li {
+                display: block;
+                overflow: hidden;
+                padding: 2px 0;
+                width: 100%;
+            }
+            #sr-header-area li:hover {
+                background-color: #c4ddef;
+            }
+            #sr-header-area li a {
+                display: block;
+                overflow: hidden;
+                padding-right: 10px;
+                padding-left: 20px;
+                text-overflow: ellipsis;
+            }
+            #sr-header-area li a:hover {
+                text-decoration: none;
+            }
+            #sr-header-area #sr-more-link {
+                position: static;
+                display: block;
+                margin-top: 10px;
+                padding-left: 20px;
+                background: none;
+            }
+            #sr-header-area #sr-more-link:hover {
+                background-color: #c4ddef;
+                text-decoration: none;
+            }
+            #header-bottom-left {
+                z-index: 56754;
+            }
+            #header-bottom-left-background {
+                z-index: 56752;
+            }
+            #sr-header-area {
+                z-index: 58468;
+            }
+            #header-bottom-right {
+                z-index: 451;
+            }
+            #tnr_collapsedview {
+                display: none;
+            }
+            #tnr_collapsedview {
+                display: block;
+                margin-top: 18px;
+                padding: 14px 5px 42px 17px;
+                border-top: 1px solid #b9c9e5;
+                border-bottom: 1px solid #b9c9e5;
+                background-color: #c9d9e5;
+                cursor: pointer;
+            }
+            #tnr_collapsedview:hover {
+                background-color: #b9c9d5;
+            }
+            #tnr_collapsedview span {
+                display: block;
+                margin-right: 14px;
+                background: no-repeat right 5px inline-image('arrowcollapse.png');
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 125%;
+            }
+            #tnr_collapsedview:hover span {
+                background-image: inline-image('arrowcollapse_hover.png');
+            }
+            .sr-list li {
+                cursor: pointer;
+            }
+        }
+    }
+    
+}
