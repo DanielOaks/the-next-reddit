@@ -15,21 +15,11 @@
             "js": [
                 "BabelExt.js", 
                 "jquery.min.js", 
-                "the_next_reddit.js"
+                "the_next_reddit.user.js"
             ], 
             "css": [
                 "the_next_reddit.css"
-            ], 
-            "fonts": {
-                "Open Sans": {
-                    "truetype": [
-                        [["normal", "normal"], "OpenSans-Regular-webfont.ttf"], 
-                        [["normal", "italic"], "OpenSans-Italic-webfont.ttf"], 
-                        [["bold", "normal"], "OpenSans-Bold-webfont.ttf"], 
-                        [["bold", "italic"], "OpenSans-BoldItalic-webfont.ttf"]
-                    ]
-                }
-            }
+            ]
         }
     },
     "chrome": {
@@ -46,7 +36,7 @@
         "update_url": "http://babelext.com/update-chrome.php"
     }, 
     "firefox": {
-
+        "id": "jid1-IDC9PhaOyFVo3g"
     }, 
     "opera": {
 

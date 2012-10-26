@@ -3,8 +3,8 @@
 import __future__
 
 import os
-import sys
 import shutil
+import fileinput
 
 # Argument Parsing
 
@@ -35,33 +35,32 @@ if not (vars(args)['clean'] or vars(args)['link']):
 
 if vars(args)['build_dir']:
     build_dir = vars(args)['build_dir']
-    if vars(args)['d']: print('  Build directory changed to ' + build_dir)
+    if vars(args)['d']:
+        print('  Build directory changed to ' + build_dir)
 else:
     build_dir = 'build'
 
 if vars(args)['link']:
     vars(args)['clean'] = True
 
-
 # extension cleaning
 if vars(args)['clean']:
-    if vars(args)['d']: print('  Cleaning ' + build_dir)
+    if vars(args)['d']:
+        print('  Cleaning ' + build_dir)
 
     if os.path.isdir(build_dir):
         shutil.rmtree(build_dir)
 
-
 # extension linking
 if vars(args)['link']:
-    if vars(args)['d']: print('  Linking to ' + build_dir)
+    if vars(args)['d']:
+        print('  Linking to ' + build_dir)
 
-    if vars(args)['d']: print('    Copying bases into ' + build_dir)
+        print('    Copying bases into ' + build_dir)
     shutil.copytree('base', build_dir)
-
 
     import codecs
     import json
-
 
     # load base manifest
     file_path = 'lib' + os.sep + 'manifest.json'
@@ -69,36 +68,41 @@ if vars(args)['link']:
     manifest = json.loads(file.read())
     file.close()
 
-
     ##
     ## Userscript/Userstyle base
     ##
-    if vars(args)['d']: print('') # space between different build dirs
-    if vars(args)['d']: print('    Building Userscript/Userstyle etc files into ' + build_dir + os.sep + 'User')
-    if vars(args)['d']: print('      Note: fonts and icons not built into User directory')
+    if vars(args)['d']:
+        print('')  # space between different build dirs
+        print('    Building Userscript/Userstyle etc files into ' + build_dir + os.sep + 'User')
+        print('      Note: fonts and icons not built into User directory')
 
     for filename in os.listdir('lib'):
         if filename.split('.')[-1] not in ['js', 'css']:
             continue
         if filename not in ['manifest.json', 'BabelExt.js']:
-            if vars(args)['d']: print('        Copying file ' + filename)
+            if ('js' in filename) and ('user.js' not in filename):
+                continue
+            if vars(args)['d']:
+                print('        Copying file ' + filename)
             shutil.copyfile('lib' + os.sep + filename, build_dir + os.sep + 'User' + os.sep + filename)
 
-    if vars(args)['d']: print('') # space between different build dirs
-
+    if vars(args)['d']:
+        print('')  # space between different build dirs
 
     ##
     ## Chrome manifest
     ##
-    if vars(args)['d']: print('    Building Chrome manifest and files into ' + build_dir + os.sep + 'Chrome')
+    # @-moz-document messes up files for the Chrome files
+    if vars(args)['d']:
+        print('    Building Chrome manifest and files into ' + build_dir + os.sep + 'Chrome')
     chrome_manifest = {}
     chrome_manifest["manifest_version"] = 2
     chrome_manifest['content_scripts'] = [{}]
     #chrome_manifest['content_scripts'][0]['all_frames'] = True
 
-
     if 'fonts' in manifest['base']['files']:
-        if vars(args)['d']: print('        Building font file')
+        if vars(args)['d']:
+            print('        Building font file')
         chrome_filepath = 'chrome-extension://__MSG_@@extension_id__/'
         fontfile = ''
 
@@ -117,7 +121,6 @@ if vars(args)['link']:
         chrome_font_file = codecs.open(file_path, 'w', 'utf8')
         chrome_font_file.write(fontfile)
         chrome_font_file.close()
-
 
     chrome_manifest['name'] = manifest['base']['name']
     chrome_manifest['version'] = manifest['base']['version']
@@ -146,7 +149,8 @@ if vars(args)['link']:
     # aaand copy the actual lib files into there
     for filename in os.listdir('lib'):
         if filename not in ['manifest.json', '.DS_Store']:
-            if vars(args)['d']: print('        Copying file ' + filename)
+            if vars(args)['d']:
+                print('        Copying file ' + filename)
             shutil.copyfile('lib' + os.sep + filename, build_dir + os.sep + 'Chrome' + os.sep + filename)
 
     # font files, do this here to get past the manual chrome manifest
@@ -154,20 +158,21 @@ if vars(args)['link']:
         chrome_manifest['content_scripts'][0]['css'].append('fonts.css')
 
     # save manifest
-    if vars(args)['d']: print('        Saving manifest')
+    if vars(args)['d']:
+        print('        Saving manifest')
     file_path = build_dir + os.sep + 'Chrome' + os.sep + 'manifest.json'
     chrome_file = codecs.open(file_path, 'w', 'utf8')
     chrome_file.write(json.dumps(chrome_manifest, sort_keys=True, indent=4))
     chrome_file.close()
 
-
-    if vars(args)['d']: print('') # space between different build dirs
-
+    if vars(args)['d']:
+        print('')  # space between different build dirs
 
     ##
     ## Firefox manifest
     ##
-    if vars(args)['d']: print('    Building Firefox manifest and files into ' + build_dir + os.sep + 'Firefox')
+    if vars(args)['d']:
+        print('    Building Firefox manifest and files into ' + build_dir + os.sep + 'Firefox')
     firefox_manifest = {}
 
     firefox_manifest['name'] = manifest['base']['progname']
@@ -182,18 +187,41 @@ if vars(args)['link']:
     firefox_manifest['license'] = manifest['base']['license']
     firefox_manifest['version'] = manifest['base']['version']
 
-    # TODO: add files automagically
-
-    # change around main.js style and script arrays
-
     firefox_manifest.update(manifest['firefox'])
 
+    # generate firefox css/js include lists
+    firefox_css = '['
+    for filename in manifest['base']['files']['css']:
+        firefox_css += "self.data.url('" + filename + "'), "
+    firefox_css = firefox_css[:-2] + ']'
+
+    firefox_js = '['
+    for filename in manifest['base']['files']['js']:
+        firefox_js += "self.data.url('" + filename + "'), "
+    firefox_js = firefox_js[:-2] + ']'
+
+    # add files to main js
+    firefox_main = open('build' + os.sep + 'Firefox' + os.sep + 'lib' + os.sep + 'main.js', 'w')
+    for line in fileinput.input(['base' + os.sep + 'Firefox' + os.sep + 'lib' + os.sep + 'main.js']):
+        line = line.replace('include: ["*.babelext.com"]', 'include: ' + str(manifest['base']['sites']))
+        line = line.replace("contentScriptFile: [self.data.url('BabelExt.js'), self.data.url('extension.js')]", 'contentScriptFile: ' + firefox_js + ',\n  contentStyleFile: ' + firefox_css)
+        firefox_main.write(line)
+    firefox_main.close()
+
+    # aaand copy the actual lib files into there
+    for filename in os.listdir('lib'):
+        if filename not in ['manifest.json', '.DS_Store']:
+            if vars(args)['d']:
+                print('        Copying file ' + filename)
+            shutil.copyfile('lib' + os.sep + filename, build_dir + os.sep + 'Firefox' + os.sep + 'data' + os.sep + filename)
+
     # save manifest
-    if vars(args)['d']: print('        Saving manifest')
+    if vars(args)['d']:
+        print('        Saving manifest')
     file_path = 'build' + os.sep + 'Firefox' + os.sep + 'package.json'
     firefox_file = codecs.open(file_path, 'w', 'utf8')
     firefox_file.write(json.dumps(firefox_manifest, sort_keys=True, indent=4))
     firefox_file.close()
 
-
-    if vars(args)['d']: print('') # space between different build dirs
+    if vars(args)['d']:
+        print('')  # space between different build dirs

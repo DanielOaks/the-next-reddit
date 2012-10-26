@@ -5,520 +5,516 @@
 @import "compass";
 $experimental-support-for-svg: true;  // fix background gradients for IE9/Opera
 
-@-moz-document domain("reddit.com") {
+html body.tnr {
 
     #tnr-version {
         width: 1px;  // keep synced with tnr-version var in js file
     }
 
-    html body.tnr {
+    // global rules
+    overflow-x: hidden;
+    font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif !important;
 
-        // global rules
-        overflow-x: hidden;
-        font-family: 'Open Sans',Times,verdana,arial,helvetica,sans-serif !important;
+    // floating My Reddits list
+    #sr-header-area {
+        position: absolute;
+        top: 24px;
+        left: 160px;
+        overflow: visible !important;
+        max-width: 86%;
+        border-bottom: none !important;
+        background: none !important;
+        font-size: 105% !important;
+    }
+    #sr-header-area .width-clip {
+        position: relative !important;
+    }
+    #sr-header-area .sr-list {
+        position: relative;
+        float: left;
+        clear: left;  // floar underneath dropdown
+        padding-bottom: 1px !important;
+        padding-left: 5px !important;
+    }
+    #header-bottom-left .redditname, #header-bottom-left .pagename {
+        display: none !important;  // overlaps with my reddits list
+    }
+    .sr-bar a {
+        color: #306496 !important;
+    }
+    #sr-header-area .selected a {
+        color: #ff410c !important;
+    }
+    .sr-bar .separator {
+        visibility: hidden;
+        margin: 0 5px !important;
+    }
+    .sr-list .separator:nth-child(2) {
+        margin: 0 12px !important;
+    }
+    .dropdown.srdrop .selected {
+        margin-right: 5px !important;
+        padding-right: 14px !important;
+        background-image: inline-image('arrowdown.png') !important;
+        background-position: right 8px !important;
+        color: black !important;
+        font-weight: normal !important;
+    }
 
-        // floating My Reddits list
-        #sr-header-area {
-            position: absolute;
-            top: 24px;
-            left: 160px;
-            overflow: visible !important;
-            max-width: 86%;
-            border-bottom: none !important;
-            background: none !important;
-            font-size: 105% !important;
+    // my-reddit list background
+    &.tnr-collapsed {
+        #sr-header-area .dropdown {
+            @include border-radius(3px 3px 0 0);
+            background-color: #e7f1fa !important;
         }
-        #sr-header-area .width-clip {
-            position: relative !important;
+        .sr-list {
+            @include border-radius(0 3px 3px 3px);
+            background-color: #e7f1fa !important;
         }
-        #sr-header-area .sr-list {
-            position: relative;
-            float: left;
-            clear: left;  // floar underneath dropdown
-            padding-bottom: 1px !important;
-            padding-left: 5px !important;
-        }
-        #header-bottom-left .redditname, #header-bottom-left .pagename {
-            display: none !important;  // overlaps with my reddits list
-        }
-        .sr-bar a {
-            color: #306496 !important;
-        }
-        #sr-header-area .selected a {
-            color: #ff410c !important;
-        }
-        .sr-bar .separator {
-            visibility: hidden;
-            margin: 0 5px !important;
-        }
-        .sr-list .separator:nth-child(2) {
-            margin: 0 12px !important;
-        }
-        .dropdown.srdrop .selected {
-            margin-right: 5px !important;
-            padding-right: 14px !important;
-            background-image: inline-image('arrowdown.png') !important;
-            background-position: right 8px !important;
-            color: black !important;
-            font-weight: normal !important;
-        }
+    }
 
-        // my-reddit list background
-        &.tnr-collapsed {
-            #sr-header-area .dropdown {
-                @include border-radius(3px 3px 0 0);
-                background-color: #e7f1fa !important;
-            }
-            .sr-list {
-                @include border-radius(0 3px 3px 3px);
-                background-color: #e7f1fa !important;
-            }
-        }
-
-        // header
+    // header
+    #header {
+        border-bottom: none !important;
+    }
+    &.tnr-collapsed {
         #header {
-            border-bottom: none !important;
+            background-color: #e7f1fa !important;
         }
-        &.tnr-collapsed {
-            #header {
-                background-color: #e7f1fa !important;
-            }
-            #header-bottom-left {
-                padding-top: 15px !important;
-                padding-bottom: 15px !important;
-            }
-            #header-img {
-                margin-left: 13px;
-            }
+        #header-bottom-left {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
-        &.tnr-list {
-            #tnr_logo {
-                display: block;
-                width: 100%;
-                height: 72px;
-                background: center center no-repeat inline-image('reddit_logo.png');
-            }
-            #header-bottom-left {
-                height: 0;
-            }
-            #header-img, .pagename, .redditname {
-                display: none !important;
-            }
+        #header-img {
+            margin-left: 13px;
         }
-    
-        // Userbar List, etc
-        #header-bottom-right {
-            position: relative !important;
-            float: left !important;
-            padding: 10px 5px 12px 0 !important;
-            
+    }
+    &.tnr-list {
+        #tnr_logo {
+            display: block;
             width: 100%;
-            border-top-left-radius: 0 !important;
-            text-align: right;
-            
-            font-size: 115%;
+            height: 72px;
+            background: center center no-repeat inline-image('reddit_logo.png');
         }
-        #header-bottom-right a {
-            color: #336699 !important;
+        #header-bottom-left {
+            height: 0;
         }
-        &.tnr-collapsed #header-bottom-right {
-            border: 1px solid #fff;
-            border-width: 1px 0;
-            border-color: #fff transparent #fff;
-            
-            background: #e9f0f7 !important; // Old browsers
-            @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
-            box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
-            color: #336699 !important;
+        #header-img, .pagename, .redditname {
+            display: none !important;
         }
-        &.tnr-list #header-bottom-right {
-            border-top: 1px solid transparent;
-            border-bottom: 1px solid transparent;
-        }
+    }
 
-        #modmail {
-            text-align: left;  // remove text
-        }
-        #mail {
-            @extend #modmail;
-            top: 1px !important;
-        }
-        .pref-lang {
-            font-weight: normal !important;
-        }
-        #header-bottom-right .logout {
-            display: inline-block;
-            margin-right: 22px !important;
-        }
+    // Userbar List, etc
+    #header-bottom-right {
+        position: relative !important;
+        float: left !important;
+        padding: 10px 5px 12px 0 !important;
+        
+        width: 100%;
+        border-top-left-radius: 0 !important;
+        text-align: right;
+        
+        font-size: 115%;
+    }
+    #header-bottom-right a {
+        color: #336699 !important;
+    }
+    &.tnr-collapsed #header-bottom-right {
+        border: 1px solid #fff;
+        border-width: 1px 0;
+        border-color: #fff transparent #fff;
+        
+        background: #e9f0f7 !important; // Old browsers
+        @include background(linear-gradient(top, #e9f0f7 0%, #f5faff 40%) !important);
+        box-shadow: 0 1px 0 #DBE2E8, 0 -1px 0 #DBE2E8;
+        color: #336699 !important;
+    }
+    &.tnr-list #header-bottom-right {
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+    }
+
+    #modmail {
+        text-align: left;  // remove text
+    }
+    #mail {
+        @extend #modmail;
+        top: 1px !important;
+    }
+    .pref-lang {
+        font-weight: normal !important;
+    }
+    #header-bottom-right .logout {
+        display: inline-block;
+        margin-right: 22px !important;
+    }
+    .tabmenu {
+        position: absolute;
+        left: 38px;
+        z-index: 1;
+        margin-top: 0 !important;
+        padding-top: 9px !important;
+        font-size: 80%;
+    }
+    &.tnr-collapsed .tabmenu {
+        top: 75px !important;
+    }
+    &.tnr-list .tabmenu {
+        top: 0 !important;
+    }
+    .tabmenu.formtab {
+        z-index: 999999;
+    }
+    .tabmenu li {
+        display: inline-block !important;
+        height: 28px !important;
+    }
+    .tabmenu li.selected {
+        background: no-repeat bottom center inline-image('arrowselected.png') !important;
+    }
+    .tabmenu li a {
+        border: none !important;
+        background: none !important;
+        font-weight: bold !important;
+        font-size: 125%;
+    }
+    .tabmenu li:not(.selected) a {
+        color: #336699 !important;
+    }
+    .tabmenu li:selected a {
+        color: orangered !important;
+    }
+    .tabmenu.formtab li {
+        font-weight: bold !important;
+        font-size: 80%;
+    }
+    .tabmenu.formtab .selected a {
+        color: orangered !important;
+        font-size: 125% !important;
+    }
+    #header-bottom-right .separator {
+        visibility: hidden;
+    }
+    #header-bottom-right .separator:nth-last-child(-n+2) {
+        visibility: visible;
+        margin: 0 12px !important;
+    }
+    .user .userkarma {
+        margin: 0 3px;
+        border-bottom: 1px dotted #999 !important;
+    }
+
+    // Side
+    .side {
+        margin-top: 5px !important;
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+    }
+    .side .spacer {
+        margin: 17px 0 22px !important;
+    }
+    #search input[type="text"] {
+        padding: 5px 16px 6px !important;
+        width: 266px !important;
+        border-color: #c6c6c6 !important;
+        @include border-radius(5px);
+    }
+    .morelink {
+        margin: 0 auto !important;
+        padding: 4px 0 5px !important;
+        width: 87%;
+        border: 1px solid #c6deea;
+        @include border-radius(5px);
+
+        background: #f5faff !important; // Old browsers
+        @include background(linear-gradient(top, #f5faff, #c6deea) !important);
+    }
+    .morelink .nub {
+        display: none;
+    }
+    
+    .morelink a {
+        margin-left: 20px;
+        font-weight: normal;
+    }
+    .morelink:hover a {
+        color: #114477 !important;
+    }
+    .sidebox .subtitle {
+        margin-right: 35px !important;
+    }
+    .sidebox .spacer a {
+        top: -45px !important;
+        left: 32px !important;
+    }
+    .spacer .sidebox .spacer {
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+        padding-left: 25px !important;
+    }
+    .side .sidecontentbox .title h1 {
+        display: inline-block !important;
+        margin-bottom: 3px !important;
+        font-weight: bold !important;
+        font-size: 110% !important;
+    }
+    .side .sidecontentbox .content {
+        padding: 17px !important;
+        border-color: #c6c6c6 !important;
+    }
+    .side .sidecontentbox .content .gadget .reddit-link {
+        padding-bottom: 7px !important;
+    }
+    .side .sidecontentbox .content .gadget .reddit-entry {
+        margin-left: 30px !important;
+    }
+
+    // Links
+    .link {
+        margin-top: 15px !important;
+    }
+    .link .rank {
+        margin-top: 17px !important;
+        margin-right: 8px;
+        margin-left: 3px;
+        font-size: small !important;
+    }
+    .link .midcol {
+        margin-right: 17px !important;
+    }
+    .link .flat-list {
+        padding: 3px 0 4px !important;
+        font-size: 105% !important;
+    }
+    .tagline {
+        margin-top: -3px !important;
+        font-size: 110% !important;
+    }
+    
+    .content, .side {
+        clear: left !important;
+    }
+    .content {
+        padding-top: 1px !important;
+    }
+
+    // next-prev
+    .nextprev {
+        margin-top: 30px !important;
+        margin-left: 29px !important;
+        font-size: 150% !important;
+    }
+    .nextprev a {
+        margin-left: 20px !important;
+        padding: 5px 21px !important;
+        
+        border: 1px solid #c6deea !important;
+        @include border-radius(4px !important);
+        
+        background: #f5faff !important; // Old browsers
+        @include background(linear-gradient(top, #f5faff, #c6deea) !important);
+    }
+    
+    // footer
+    .footer-parent {
+        padding-top: 13px !important;
+        text-align: left !important;
+    }
+    .bottommenu {
+        margin-left: 36px !important;
+    }
+
+    // list view button, added by js
+    #tnr_listview {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1234;
+        background: #c9d9e5;
+        cursor: pointer;
+    }
+    #tnr_listview span {
+        display: block;
+        margin: 43px 11px 0 18px;
+        padding: 0 16px 0 0;
+        background: no-repeat right 5px inline-image('arrowlist.png');
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 125%;
+    }
+    #tnr_listview:hover {
+        background-color: #b9c9d5;
+    }
+    #tnr_listview:hover span {
+        background-image: inline-image('arrowlist_hover.png');
+    }
+
+    // Reddit Enhancement Suite fixes
+    #header-bottom-right.res-navTop {
+        top: 0 !important;
+    }
+    &.res {
         .tabmenu {
-            position: absolute;
-            left: 38px;
-            z-index: 1;
-            margin-top: 0 !important;
-            padding-top: 9px !important;
-            font-size: 80%;
-        }
-        &.tnr-collapsed .tabmenu {
-            top: 75px !important;
-        }
-        &.tnr-list .tabmenu {
-            top: 0 !important;
-        }
-        .tabmenu.formtab {
-            z-index: 999999;
-        }
-        .tabmenu li {
-            display: inline-block !important;
-            height: 28px !important;
+            padding-top: 11px !important;
         }
         .tabmenu li.selected {
-            background: no-repeat bottom center inline-image('arrowselected.png') !important;
+            height: 31px !important;
         }
-        .tabmenu li a {
-            border: none !important;
+        #sr-header-area {
+            width: 450px;
+        }
+        #sr-header-area .sr-bar {
+            display: block !important;
+            float: left !important;
+            width: 100% !important;
+        }
+        #RESShortcutsEditContainer {
+            float: right;
+            margin-top: 2px !important;
             background: none !important;
-            font-weight: bold !important;
-            font-size: 125%;
         }
-        .tabmenu li:not(.selected) a {
-            color: #336699 !important;
+        #RESShortcutsEditContainer div {
+            background: none !important;
         }
-        .tabmenu li:selected a {
-            color: orangered !important;
-        }
-        .tabmenu.formtab li {
-            font-weight: bold !important;
-            font-size: 80%;
-        }
-        .tabmenu.formtab .selected a {
-            color: orangered !important;
-            font-size: 125% !important;
-        }
-        #header-bottom-right .separator {
-            visibility: hidden;
-        }
-        #header-bottom-right .separator:nth-last-child(-n+2) {
-            visibility: visible;
-            margin: 0 12px !important;
-        }
-        .user .userkarma {
-            margin: 0 3px;
-            border-bottom: 1px dotted #999 !important;
-        }
-    
-        // Side
-        .side {
-            margin-top: 5px !important;
-            padding-right: 20px !important;
-            padding-left: 20px !important;
-        }
-        .side .spacer {
-            margin: 17px 0 22px !important;
-        }
-        #search input[type="text"] {
-            padding: 5px 16px 6px !important;
-            width: 266px !important;
-            border-color: #c6c6c6 !important;
-            @include border-radius(5px);
-        }
-        .morelink {
-            margin: 0 auto !important;
-            padding: 4px 0 5px !important;
-            width: 87%;
-            border: 1px solid #c6deea;
-            @include border-radius(5px);
-
-            background: #f5faff !important; // Old browsers
-            @include background(linear-gradient(top, #f5faff, #c6deea) !important);
-        }
-        .morelink .nub {
+        .srSep {
             display: none;
         }
-        
-        .morelink a {
-            margin-left: 20px;
-            font-weight: normal;
-        }
-        .morelink:hover a {
-            color: #114477 !important;
-        }
-        .sidebox .subtitle {
-            margin-right: 35px !important;
-        }
-        .sidebox .spacer a {
-            top: -45px !important;
-            left: 32px !important;
-        }
-        .spacer .sidebox .spacer {
-            margin-top: 0 !important;
-            margin-bottom: 10px !important;
-            padding-left: 25px !important;
-        }
-        .side .sidecontentbox .title h1 {
-            display: inline-block !important;
-            margin-bottom: 3px !important;
-            font-weight: bold !important;
-            font-size: 110% !important;
-        }
-        .side .sidecontentbox .content {
-            padding: 17px !important;
-            border-color: #c6c6c6 !important;
-        }
-        .side .sidecontentbox .content .gadget .reddit-link {
-            padding-bottom: 7px !important;
-        }
-        .side .sidecontentbox .content .gadget .reddit-entry {
-            margin-left: 30px !important;
-        }
-    
-        // Links
-        .link {
-            margin-top: 15px !important;
-        }
-        .link .rank {
-            margin-top: 17px !important;
-            margin-right: 8px;
-            margin-left: 3px;
-            font-size: small !important;
-        }
-        .link .midcol {
-            margin-right: 17px !important;
-        }
-        .link .flat-list {
-            padding: 3px 0 4px !important;
-            font-size: 105% !important;
-        }
-        .tagline {
-            margin-top: -3px !important;
-            font-size: 110% !important;
+        #RESShortcutsViewport {
+            margin-left: 2px !important;
         }
         
-        .content, .side {
-            clear: left !important;
+        #sr-header-area {
+            @include border-radius(3px 3px 3px 0);
+            background-color: #e7f1fa !important;
         }
-        .content {
-            padding-top: 1px !important;
+        #RESShortcutsViewport {
+            @include border-radius(0 3px 3px 3px);
+            background-color: #e7f1fa !important;
         }
-    
-        // next-prev
-        .nextprev {
-            margin-top: 30px !important;
-            margin-left: 29px !important;
-            font-size: 150% !important;
+        #sr-header-area #RESShortcutsViewport #RESShortcuts {
+            width: 200px !important;
         }
-        .nextprev a {
-            margin-left: 20px !important;
-            padding: 5px 21px !important;
-            
-            border: 1px solid #c6deea !important;
-            @include border-radius(4px !important);
-            
-            background: #f5faff !important; // Old browsers
-            @include background(linear-gradient(top, #f5faff, #c6deea) !important);
-        }
+    }
+
+    // list view
+    // .tnr-list #header-bottom-left {
+    //  position: absolute;
+    // padding: 20px;
+    // min-width: 163px;
+    // width: auto;
+    #header-bottom-left-background {
+        position: fixed !important;
+        height: 100% !important;
         
-        // footer
-        .footer-parent {
-            padding-top: 13px !important;
-            text-align: left !important;
+        border-right: 1px solid #b9b9d5;
+
+        background: #eef4fa !important; // Old browsers
+        @include background(linear-gradient(left, #eef4fa 83%, #e6ecf3) !important);
+    }
+    #tnr_collapsedview {
+        display: none;
+    }
+    &.tnr-list {
+        #header {
+            border-bottom: none !important;
+            background: none !important;
         }
-        .bottommenu {
-            margin-left: 36px !important;
+        #header-bottom-right {
+            box-shadow: 0 1px 0 #DBE2E8 !important;
         }
-    
-        // list view button, added by js
-        #tnr_listview {
-            position: absolute;
-            top: 0;
-            right: 0;
-            z-index: 1234;
-            background: #c9d9e5;
+        .tabmenu {
+            z-index: 453 !important;
+        }
+        #header-bottom-right {
+            background: #fff !important;
+        }
+        .sr-list {
+            background: none !important;
+        }
+        #sr-header-area {
+            left: 0 !important;
+        }
+        #sr-header-area .sr-list {
+            float: none;
+            padding: 0 !important;
+            @include border-radius(0);
+        }
+        #sr-header-area .dropdown {
+            display: none !important;
+        }
+        #sr-header-area .separator {
+            visibility: hidden;
+        }
+        #sr-header-area li .separator {
+            display: none;
+        }
+        #sr-header-area li {
+            display: block !important;
+            overflow: hidden !important;
+            padding: 2px 0 !important;
+            width: 100% !important;
+        }
+        #sr-header-area li:hover {
+            background-color: #c4ddef;
+        }
+        #sr-header-area li a {
+            display: block;
+            overflow: hidden;
+            padding-right: 10px;
+            padding-left: 20px;
+            text-overflow: ellipsis;
+        }
+        #sr-header-area li a:hover {
+            text-decoration: none !important;
+        }
+        #sr-header-area #sr-more-link {
+            position: static !important;
+            display: block !important;
+            margin-top: 10px !important;
+            padding-left: 20px !important;
+            background: none !important;
+        }
+        #sr-header-area #sr-more-link:hover {
+            background-color: #c4ddef !important;
+            text-decoration: none !important;
+        }
+        #header-bottom-left {
+            z-index: 56754;
+        }
+        #header-bottom-left-background {
+            z-index: 56752;
+        }
+        #sr-header-area {
+            z-index: 58468;
+        }
+        #header-bottom-right {
+            z-index: 451;
+        }
+        #tnr_collapsedview {
+            display: block;
+            margin-top: 18px !important;
+            padding: 14px 5px 42px 17px !important;
+            border-top: 1px solid #b9c9e5;
+            border-bottom: 1px solid #b9c9e5;
+            background-color: #c9d9e5;
             cursor: pointer;
         }
-        #tnr_listview span {
+        #tnr_collapsedview:hover {
+            background-color: #b9c9d5;
+        }
+        #tnr_collapsedview span {
             display: block;
-            margin: 43px 11px 0 18px;
-            padding: 0 16px 0 0;
-            background: no-repeat right 5px inline-image('arrowlist.png');
+            margin-right: 14px;
+            background: no-repeat right 5px inline-image('arrowcollapse.png');
             color: #ffffff;
             font-weight: bold;
             font-size: 125%;
         }
-        #tnr_listview:hover {
-            background-color: #b9c9d5;
+        #tnr_collapsedview:hover span {
+            background-image: inline-image('arrowcollapse_hover.png');
         }
-        #tnr_listview:hover span {
-            background-image: inline-image('arrowlist_hover.png');
-        }
-    
-        // Reddit Enhancement Suite fixes
-        #header-bottom-right.res-navTop {
-            top: 0 !important;
-        }
-        &.res {
-            .tabmenu {
-                padding-top: 11px !important;
-            }
-            .tabmenu li.selected {
-                height: 31px !important;
-            }
-            #sr-header-area {
-                width: 450px;
-            }
-            #sr-header-area .sr-bar {
-                display: block !important;
-                float: left !important;
-                width: 100% !important;
-            }
-            #RESShortcutsEditContainer {
-                float: right;
-                margin-top: 2px !important;
-                background: none !important;
-            }
-            #RESShortcutsEditContainer div {
-                background: none !important;
-            }
-            .srSep {
-                display: none;
-            }
-            #RESShortcutsViewport {
-                margin-left: 2px !important;
-            }
-            
-            #sr-header-area {
-                @include border-radius(3px 3px 3px 0);
-                background-color: #e7f1fa !important;
-            }
-            #RESShortcutsViewport {
-                @include border-radius(0 3px 3px 3px);
-                background-color: #e7f1fa !important;
-            }
-            #sr-header-area #RESShortcutsViewport #RESShortcuts {
-                width: 200px !important;
-            }
-        }
-    
-        // list view
-        // .tnr-list #header-bottom-left {
-        //  position: absolute;
-        // padding: 20px;
-        // min-width: 163px;
-        // width: auto;
-        #header-bottom-left-background {
-            position: fixed !important;
-            height: 100% !important;
-            
-            border-right: 1px solid #b9b9d5;
-
-            background: #eef4fa !important; // Old browsers
-            @include background(linear-gradient(left, #eef4fa 83%, #e6ecf3) !important);
-        }
-        #tnr_collapsedview {
-            display: none;
-        }
-        &.tnr-list {
-            #header {
-                border-bottom: none !important;
-                background: none !important;
-            }
-            #header-bottom-right {
-                box-shadow: 0 1px 0 #DBE2E8 !important;
-            }
-            .tabmenu {
-                z-index: 453 !important;
-            }
-            #header-bottom-right {
-                background: #fff !important;
-            }
-            .sr-list {
-                background: none !important;
-            }
-            #sr-header-area {
-                left: 0 !important;
-            }
-            #sr-header-area .sr-list {
-                float: none;
-                padding: 0 !important;
-                @include border-radius(0);
-            }
-            #sr-header-area .dropdown {
-                display: none !important;
-            }
-            #sr-header-area .separator {
-                visibility: hidden;
-            }
-            #sr-header-area li .separator {
-                display: none;
-            }
-            #sr-header-area li {
-                display: block !important;
-                overflow: hidden !important;
-                padding: 2px 0 !important;
-                width: 100% !important;
-            }
-            #sr-header-area li:hover {
-                background-color: #c4ddef;
-            }
-            #sr-header-area li a {
-                display: block;
-                overflow: hidden;
-                padding-right: 10px;
-                padding-left: 20px;
-                text-overflow: ellipsis;
-            }
-            #sr-header-area li a:hover {
-                text-decoration: none !important;
-            }
-            #sr-header-area #sr-more-link {
-                position: static !important;
-                display: block !important;
-                margin-top: 10px !important;
-                padding-left: 20px !important;
-                background: none !important;
-            }
-            #sr-header-area #sr-more-link:hover {
-                background-color: #c4ddef !important;
-                text-decoration: none !important;
-            }
-            #header-bottom-left {
-                z-index: 56754;
-            }
-            #header-bottom-left-background {
-                z-index: 56752;
-            }
-            #sr-header-area {
-                z-index: 58468;
-            }
-            #header-bottom-right {
-                z-index: 451;
-            }
-            #tnr_collapsedview {
-                display: block;
-                margin-top: 18px !important;
-                padding: 14px 5px 42px 17px !important;
-                border-top: 1px solid #b9c9e5;
-                border-bottom: 1px solid #b9c9e5;
-                background-color: #c9d9e5;
-                cursor: pointer;
-            }
-            #tnr_collapsedview:hover {
-                background-color: #b9c9d5;
-            }
-            #tnr_collapsedview span {
-                display: block;
-                margin-right: 14px;
-                background: no-repeat right 5px inline-image('arrowcollapse.png');
-                color: #ffffff;
-                font-weight: bold;
-                font-size: 125%;
-            }
-            #tnr_collapsedview:hover span {
-                background-image: inline-image('arrowcollapse_hover.png');
-            }
-            .sr-list li {
-                cursor: pointer;
-            }
+        .sr-list li {
+            cursor: pointer;
         }
     }
-    
 }
